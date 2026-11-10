@@ -16,6 +16,43 @@ body {
     padding: 15px 20px;
 }
 
+/* BİLDİRİŞ TOAST STİLİ */
+.notification-toast {
+    position: fixed;
+    top: 20px;
+    right: -350px;
+    background: #1e293b;
+    border-left: 4px solid maroon;
+    border: 1px solid #334155;
+    padding: 12px 18px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    z-index: 9999;
+    transition: right 0.4s ease;
+}
+
+.notification-toast.show {
+    right: 20px;
+}
+
+.notification-toast i {
+    font-size: 24px;
+    color: rgb(255, 226, 173);
+}
+
+.notification-toast h4 {
+    font-size: 14px;
+    color: #fff;
+}
+
+.notification-toast p {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
 /* YUXARI PROFİL PANELİ VƏ HOVER EFFEKTİ */
 .top-bar {
     width: 100%;
@@ -229,8 +266,9 @@ body {
     max-width: 420px;
 }
 
-.chat-modal-box {
-    max-width: 600px;
+.large-chat-box {
+    max-width: 780px;
+    width: 95%;
 }
 
 /* AUTH / PAROL MODALI */
@@ -303,7 +341,7 @@ body {
     color: #ff4d4d;
 }
 
-/* FORM ELEMENTLƏRİ VƏ PROFİL ŞƏKLİ YÜKLƏMƏ */
+/* FORM ELEMENTLƏRİ VƏ PROFİL ŞƏKLİ */
 .profile-form, .auth-form {
     display: flex;
     flex-direction: column;
@@ -410,20 +448,92 @@ body {
     color: maroon;
 }
 
-/* ÇAT HİSSƏSİ VƏ MESAJ AVATARLARI */
+/* ÇAT LAYOUT (SOLDA KONTAKTLAR, SAĞda MESAJLAR) */
+.chat-layout-container {
+    display: flex;
+    gap: 15px;
+    min-height: 350px;
+}
+
+.contacts-sidebar {
+    width: 220px;
+    background: #0f172a;
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid #334155;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contacts-sidebar h3 {
+    font-size: 13px;
+    color: #94a3b8;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.contacts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
+    max-height: 250px;
+}
+
+.contact-item {
+    padding: 8px 12px;
+    background: #1e293b;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #e2e8f0;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.contact-item:hover, .contact-item.active-contact {
+    background: maroon;
+    color: #fff;
+    border-color: #ff9096;
+}
+
+.contact-avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.chat-main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #0f172a;
+    border-radius: 12px;
+    padding: 14px;
+    border: 1px solid #334155;
+}
+
 .chat-messages {
-    max-height: 280px;
+    flex: 1;
+    max-height: 250px;
     min-height: 200px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 12px;
     padding-right: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .chat-msg {
-    background: #0f172a;
+    background: #1e293b;
     padding: 10px 14px;
     border-radius: 10px;
     border-left: 3px solid maroon;
@@ -476,16 +586,81 @@ body {
 .msg-body {
     font-size: 14px;
     color: #e2e8f0;
+    margin-bottom: 6px;
+}
+
+/* Şəkil, Video və Fayl media elementləri */
+.msg-media img, .msg-media video {
+    max-width: 100%;
+    max-height: 180px;
+    border-radius: 8px;
+    margin-top: 5px;
+}
+
+.msg-file-link a {
+    color: rgb(255, 226, 173);
+    background: #0f172a;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    text-decoration: none;
+    border: 1px solid #334155;
+    margin-top: 5px;
+}
+
+.msg-file-link a:hover {
+    background: maroon;
+}
+
+/* Fayl Önizləmə Çubuğu */
+.file-preview-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1e293b;
+    padding: 6px 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: rgb(255, 226, 173);
+    border: 1px solid #334155;
+}
+
+.file-preview-container button {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .chat-input-box {
     display: flex;
-    gap: 10px;
+    gap: 8px;
+    align-items: center;
 }
 
-.chat-input-box input {
+.file-attach-btn {
+    background: #1e293b;
+    color: #94a3b8;
+    border: 1px solid #334155;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.file-attach-btn:hover {
+    color: #fff;
+    border-color: maroon;
+}
+
+.chat-input-box input[type="text"] {
     flex: 1;
-    background: #0f172a;
+    background: #1e293b;
     border: 1px solid #334155;
     border-radius: 8px;
     padding: 10px 14px;
@@ -502,14 +677,14 @@ body {
     cursor: pointer;
 }
 
-/* BAŞQASININ PROFİLİNƏ BAXMA CARD-I VƏ BÖYÜK AVATAR */
+/* BAŞQASININ PROFİLİ VƏ ƏLAVƏ ET / ŞƏXSİYƏ YAZ */
 .view-profile-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 10px;
-    padding-top: 10px;
+    padding-top: 5px;
 }
 
 .view-avatar-container {
@@ -555,7 +730,7 @@ body {
     padding: 12px;
     border-radius: 8px;
     text-align: left;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .view-about-box label {
@@ -568,6 +743,41 @@ body {
 .view-about-box p {
     font-size: 14px;
     color: #e2e8f0;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.action-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #fff;
+    transition: opacity 0.2s;
+}
+
+.add-btn {
+    background: maroon;
+}
+
+.dm-btn {
+    background: #334155;
+}
+
+.action-btn:hover {
+    opacity: 0.85;
 }
 
 /* FOOTER VƏ SCROLLBAR */
@@ -584,15 +794,11 @@ body {
     color: rgb(255, 226, 173);
 }
 
-.modal-box::-webkit-scrollbar, .chat-messages::-webkit-scrollbar {
+.modal-box::-webkit-scrollbar, .chat-messages::-webkit-scrollbar, .contacts-list::-webkit-scrollbar {
     width: 6px;
 }
 
-.modal-box::-webkit-scrollbar-thumb, .chat-messages::-webkit-scrollbar-thumb {
+.modal-box::-webkit-scrollbar-thumb, .chat-messages::-webkit-scrollbar-thumb, .contacts-list::-webkit-scrollbar-thumb {
     background: maroon;
     border-radius: 10px;
 }
-.cool-main-btn:hover {
-    transform: translateY(-4px) scale(1.03);
-    border-color: #ff9096;
-    box-shadow: 0 0 25px rgba(255, 144, 150, 0.6), 0 10px 30px
