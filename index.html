@@ -9,7 +9,43 @@
 </head>
 <body>
 
-    <!-- Mərkəzi Bölmə -->
+    <!-- 1. GİRİŞ PAROL MODALI (Parol: ce58) -->
+    <div id="authModal" class="modal-overlay force-show">
+        <div class="modal-box auth-box">
+            <div class="auth-header">
+                <img src="Jet School Loqo.png" alt="Jet School Logo" class="auth-logo">
+                <h2>Xoş Gelmisiniz!</h2>
+                <p>Davam etmək üçün qrup parolunu daxil edin</p>
+            </div>
+            <form id="authForm" class="auth-form">
+                <div class="form-group">
+                    <input type="password" id="passInput" placeholder="Parolu daxil edin..." required>
+                </div>
+                <p id="errorMsg" class="error-msg"></p>
+                <button type="submit" class="save-btn"><i class="fas fa-key"></i> Daxil Ol</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- YUXARI PROFİL PANALİ (Siçan yaxınlaşanda Change Profile görünür) -->
+    <header class="top-bar">
+        <div id="profileTrigger" class="user-profile-summary">
+            <div class="avatar-box">
+                <i class="fas fa-user-circle avatar-icon"></i>
+            </div>
+            <div class="user-info">
+                <span id="userNameText" class="user-name">Dilbər Cahangirli</span>
+                <span id="userRoleText" class="user-role">Class 6A | Programmer</span>
+            </div>
+            <!-- Hover zamanı üzə çıxan örtük -->
+            <div class="hover-overlay">
+                <i class="fas fa-edit"></i>
+                <span>Change Profile</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MƏRKƏZİ BÖLMƏ -->
     <div class="hero-container">
         <!-- Böyüdülmüş Şəffaf Loqo -->
         <img src="Jet School Loqo.png" alt="Jet School Logo" class="hero-logo-img">
@@ -20,229 +56,192 @@
         <h1 class="main-title">Video Kolleksiyası</h1>
         <p class="sub-title">Bütün dərslərə və faydalı keçidlərə bir kliklə baxın</p>
         
-        <!-- Videolar Düyməsi -->
-        <button id="openBtn" class="main-video-btn">
-            <i class="fab fa-youtube"></i> Videolar
-        </button>
+        <!-- EYNİ ÖLÇÜDƏ İKİ DÜYMƏ (Videolar və Çat) -->
+        <div class="action-buttons-group">
+            <button id="openVideosBtn" class="main-btn video-theme-btn">
+                <i class="fab fa-youtube"></i> Videolar
+            </button>
+            <button id="openChatBtn" class="main-btn chat-theme-btn">
+                <i class="fas fa-comments"></i> Çat
+            </button>
+        </div>
     </div>
 
-    <!-- Səhifənin Ən Altı (Footer) -->
+    <!-- SƏHİFƏNİN ƏN ALTI (Footer) -->
     <footer class="page-footer">
         <p>Müəllim: <span>Rasim İsmayılaov</span></p>
     </footer>
 
-    <!-- Modallı Video Pəncərəsi -->
+    <!-- PROFİL DƏYİŞMƏ MODALI (Name, Last Name, About) -->
+    <div id="profileModal" class="modal-overlay">
+        <div class="modal-box small-modal">
+            <div class="modal-header">
+                <h2 class="modal-main-title"><i class="fas fa-user-cog"></i> Profil Tənzimləmələri</h2>
+                <button id="closeProfileBtn" class="close-icon">&times;</button>
+            </div>
+            <form id="profileForm" class="profile-form">
+                <div class="form-group">
+                    <label for="firstNameInput">Name (Ad):</label>
+                    <input type="text" id="firstNameInput" placeholder="Məsələn: Dilbər" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastNameInput">Last Name (Soyad):</label>
+                    <input type="text" id="lastNameInput" placeholder="Məsələn: Cahangirli">
+                </div>
+                <div class="form-group">
+                    <label for="aboutInput">About (Haqqında):</label>
+                    <textarea id="aboutInput" rows="3" placeholder="Özünüz haqqında qısa məlumat yaza bilərsiniz..."></textarea>
+                </div>
+                <button type="submit" class="save-btn"><i class="fas fa-save"></i> Yadda Saxla</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- BAŞQASININ PROFİLİNƏ BAXMA MODALI (Yalnız Baxış üçündür) -->
+    <div id="viewProfileModal" class="modal-overlay">
+        <div class="modal-box small-modal view-profile-box">
+            <div class="modal-header">
+                <h2 class="modal-main-title"><i class="fas fa-id-card"></i> İstifadəçi Profili</h2>
+                <button id="closeViewProfileBtn" class="close-icon">&times;</button>
+            </div>
+            <div class="view-profile-card">
+                <i class="fas fa-user-circle view-avatar"></i>
+                <h3 id="viewFullName">Ad Soyad</h3>
+                <span class="view-tag">Jet School CE 58</span>
+                <div class="view-about-box">
+                    <label>Haqqında:</label>
+                    <p id="viewAboutText">Məlumat qeyd edilməyib.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VİDEOLAR MODALI -->
     <div id="videoModal" class="modal-overlay">
         <div class="modal-box">
-            
-            <!-- Modal Yuxarı Hissəsi -->
             <div class="modal-header">
                 <div class="header-titles">
                     <span class="badge-tag">Jet School</span>
                     <h2 class="modal-main-title">Dərslər və Keçidlər</h2>
                     <h3 class="modal-sub-title">CE 58</h3>
                 </div>
-                <button id="closeBtn" class="close-icon">&times;</button>
+                <button id="closeVideoBtn" class="close-icon">&times;</button>
             </div>
             
-            <!-- Video Siyahısı (21 Dərs) -->
             <div class="video-list">
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Dərs 1. Tanışlıq, Kompüterin növləri</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 1. Tanışlıq, Kompüterin növləri</span></div>
                     <a href="https://youtu.be/sBwt2dKCDlQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Dərs 2. Kompüterin hissələri ( CPU, GPU, RAM )</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 2. Kompüterin hissələri ( CPU, GPU, RAM )</span></div>
                     <a href="https://youtu.be/6cVqVD9MkIQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Dərs 3. Kompüterin hissələri</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 3. Kompüterin hissələri</span></div>
                     <a href="https://youtu.be/u9QGQ6UePhg" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Dərs 4. Ana plata, giriş çıxış qurğuları</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 4. Ana plata, giriş çıxış qurğuları</span></div>
                     <a href="https://youtu.be/0DwuUh662jQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Dərs 5. Əməliyyat Hissələri. Giriş</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 5. Əməliyyat Hissələri. Giriş</span></div>
                     <a href="https://www.youtube.com/watch?v=4y2etT_-VUQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Dərs 6. Əməliyyat sistemlərinin nüvələri və driver-lər</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 6. Əməliyyat sistemlərinin nüvələri və driver-lər</span></div>
                     <a href="https://youtu.be/cJMUYfsxrI8" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Dərs 7. Windows 11-in Virtualbox-a yazılması</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 7. Windows 11-in Virtualbox-a yazılması</span></div>
                     <a href="https://youtu.be/Op2f-IHL87o" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Dərs 8. Linux-un yazılması</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 8. Linux-un yazılması</span></div>
                     <a href="https://youtu.be/cwzMwkxPTz8" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Alqoritm. Dərs 1</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Alqoritm. Dərs 1</span></div>
                     <a href="https://youtu.be/T7SqDeebxY0" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Ce 58 Alqoritm</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Ce 58 Alqoritm</span></div>
                     <a href="https://www.youtube.com/watch?v=jNj80mOgR6k" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Alqoritmlər. Flowchart. Dəyişənlər</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Alqoritmlər. Flowchart. Dəyişənlər</span></div>
                     <a href="https://youtu.be/cgtLTzadeCM" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Məntiqi və Riyazi operatorlar, Tək və cüt ədədlərin tapılması</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Məntiqi və Riyazi operatorlar, Tək və cüt ədədlərin tapılması</span></div>
                     <a href="https://youtu.be/1YJ2vMjZRDs" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Online dərs, and və or izahı</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Online dərs, and və or izahı</span></div>
                     <a href="https://youtu.be/j_jBJERw6ug" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Dövrü Alqoritm</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dövrü Alqoritm</span></div>
                     <a href="https://youtu.be/0dF0YmwLN98" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>AI, LLM, ML, DL</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>AI, LLM, ML, DL</span></div>
                     <a href="https://youtu.be/jk6F5_AJg5g" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Ip, Router, Modem, WiFi</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Ip, Router, Modem, WiFi</span></div>
                     <a href="https://youtu.be/hD9aKychRc4" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Jan AI</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Jan AI</span></div>
                     <a href="https://youtu.be/9hYrOXgJ4lI" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Openclaw</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Openclaw</span></div>
                     <a href="https://youtu.be/Z_ePpxBP0ag" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Vakansiya avtomatlaşdırılması. Openclaw</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Vakansiya avtomatlaşdırılması. Openclaw</span></div>
                     <a href="https://youtu.be/K8_hhkKDrAI" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Openclaw yazılması</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Openclaw yazılması</span></div>
                     <a href="https://youtu.be/UBj0asPcpXw" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-
                 <div class="video-item">
-                    <div class="info">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Hermes</span>
-                    </div>
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Hermes</span></div>
                     <a href="https://youtu.be/rFzZ1YUTX1M" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
-            <!-- Modal Aşağı Hissəsi: Müəllim -->
             <div class="modal-footer">
                 <p>Müəllim: <span>Rasim İsmayılaov</span></p>
             </div>
-
         </div>
     </div>
 
-    <!-- Zəmanətli Modal Skripti -->
-    <script>
-        const openBtn = document.getElementById('openBtn');
-        const closeBtn = document.getElementById('closeBtn');
-        const modal = document.getElementById('videoModal');
+    <!-- ÇAT MODALI -->
+    <div id="chatModal" class="modal-overlay">
+        <div class="modal-box chat-modal-box">
+            <div class="modal-header">
+                <div class="header-titles">
+                    <span class="badge-tag">Müzakirə</span>
+                    <h2 class="modal-main-title"><i class="fas fa-comments"></i> Qrup Çatı (CE 58)</h2>
+                </div>
+                <button id="closeChatBtn" class="close-icon">&times;</button>
+            </div>
+            
+            <div id="chatMessages" class="chat-messages">
+                <div class="chat-msg system-msg">
+                    <span>Çata xoş gəlmisiniz! Şəxsin profilinə baxmaq üçün istifadəçi adına klikləyin.</span>
+                </div>
+            </div>
 
-        openBtn.addEventListener('click', function() {
-            modal.style.display = 'flex';
-        });
+            <div class="chat-input-box">
+                <input type="text" id="chatInput" placeholder="Mesajınızı yazın..." maxlength="250">
+                <button id="sendBtn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+            </div>
 
-        closeBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-        });
-
-        window.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-    </script>
-</body>
-</html>
+            <div class="modal-footer">
+                <p>Müəllim: <span>Rasim İsmayılaov</span></
