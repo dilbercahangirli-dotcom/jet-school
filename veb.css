@@ -16,7 +16,7 @@ body {
     padding: 15px 20px;
 }
 
-/* YUXARI PROFİL PANALİ VƏ HOVER EFFEKTİ */
+/* YUXARI PROFİL PANELİ VƏ HOVER EFFEKTİ */
 .top-bar {
     width: 100%;
     max-width: 1000px;
@@ -62,7 +62,6 @@ body {
     color: #94a3b8;
 }
 
-/* Hover zamanı Change Profile görünməsi */
 .hover-overlay {
     position: absolute;
     top: 0;
@@ -86,7 +85,7 @@ body {
     opacity: 1;
 }
 
-/* MƏRKƏZİ BÖLMƏ VƏ EYNİ ÖLÇÜLÜ DÜYMƏLƏR */
+/* MƏRKƏZİ BÖLMƏ */
 .hero-container {
     text-align: center;
     display: flex;
@@ -124,36 +123,37 @@ body {
     font-size: 17px;
 }
 
-/* İki Düymənin Eyni Ölçüdə Olması */
-.action-buttons-group {
+/* İKİ BƏRABƏR ÖLÇÜDƏ VƏ PARLAYAN (HOVER) DÜYMƏLƏR */
+.main-buttons-group {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-    max-width: 320px;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.main-btn {
-    width: 100%;
+.cool-main-btn {
     background: linear-gradient(135deg, maroon, #880e4f);
     color: white;
-    border: none;
-    padding: 16px 0;
+    border: 2px solid transparent;
+    padding: 16px 40px;
     font-size: 19px;
     font-weight: 600;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(128, 0, 0, 0.4);
+    box-shadow: 0 8px 25px rgba(128, 0, 0, 0.5);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+    min-width: 190px;
 }
 
-.main-btn:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 12px 28px rgba(255, 144, 150, 0.4);
+.cool-main-btn:hover {
+    transform: translateY(-4px) scale(1.03);
+    border-color: #ff9096;
+    box-shadow: 0 0 25px rgba(255, 144, 150, 0.6), 0 10px 30px rgba(128, 0, 0, 0.6);
     background: linear-gradient(135deg, #a71d2a, maroon);
 }
 
@@ -185,7 +185,6 @@ body {
     z-index: 1000;
 }
 
-/* Giriş Pəncərəsinin Məcburi Görünməsi */
 .force-show {
     display: flex !important;
 }
@@ -249,6 +248,10 @@ body {
     margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 1px solid #334155;
+    position: sticky;
+    top: 0;
+    background: #1e293b;
+    z-index: 10;
 }
 
 .badge-tag {
@@ -278,7 +281,7 @@ body {
     color: #ff4d4d;
 }
 
-/* FORM ELEMENTLƏRİ (PROFILE & PAROL) */
+/* FORM ELEMENTLƏRİ */
 .profile-form, .auth-form {
     display: flex;
     flex-direction: column;
