@@ -193,7 +193,9 @@
 
     <!-- JAVASCRIPT MƏNTİQİ -->
     <script>
-        const socket = io();
+        const socket = io("https://third-associates-attractions-dragon.trycloudflare.com", {
+    transports: ["websocket", "polling"]
+});
 
         const authModal = document.getElementById('authModal');
         const loginBtn = document.getElementById('loginBtn');
