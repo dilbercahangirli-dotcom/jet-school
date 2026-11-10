@@ -123,7 +123,7 @@ body {
     font-size: 17px;
 }
 
-/* İKİ BƏRABƏR ÖLÇÜDƏ VƏ PARLAYAN (HOVER) DÜYMƏLƏR */
+/* İKİ BƏRABƏR ÖLÇÜDƏ VƏ PARLAYAN DÜYMƏLƏR */
 .main-buttons-group {
     display: flex;
     gap: 20px;
@@ -187,6 +187,11 @@ body {
 
 .force-show {
     display: flex !important;
+}
+
+/* Modalı gizlətmək üçün sinif */
+.modal-overlay.hidden {
+    display: none !important;
 }
 
 .modal-box {
@@ -521,6 +526,11 @@ body {
 
 .modal-box::-webkit-scrollbar, .chat-messages::-webkit-scrollbar {
     width: 6px;
+}
+
+.modal-box::-webkit-scrollbar-thumb, .chat-messages::-webkit-scrollbar-thumb {
+    background: maroon;
+    border-radius: 10px;
 }
 
 .modal-box::-webkit-scrollbar-thumb, .chat-messages::-webkit-scrollbar-thumb {
