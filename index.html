@@ -253,17 +253,15 @@
         const passInput = document.getElementById('passInput');
         const errorMsg = document.getElementById('errorMsg');
 
-        // Əgər əvvəlcдən daxil olunubsa modalı gizlət
+        // Əgər əvvəlcədən daxil olunubsa modalı gizlət
         if (sessionStorage.getItem('authenticated') === 'true') {
-            authModal.style.display = 'none';
-        } else {
-            authModal.style.display = 'flex';
+            authModal.classList.add('hidden');
         }
 
         function checkLogin() {
             if (passInput.value.trim() === 'CE-58') {
                 sessionStorage.setItem('authenticated', 'true');
-                authModal.style.display = 'none';
+                authModal.classList.add('hidden');
                 errorMsg.textContent = '';
             } else {
                 errorMsg.textContent = 'Parol yanlışdır!';
