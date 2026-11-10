@@ -13,10 +13,80 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 20px;
+    padding: 15px 20px;
 }
 
-/* Hero Container */
+/* YUXARI PROFİL PANALİ VƏ HOVER EFFEKTİ */
+.top-bar {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0;
+}
+
+.user-profile-summary {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #1e293b;
+    padding: 8px 18px;
+    border-radius: 30px;
+    border: 1px solid #334155;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.avatar-icon {
+    font-size: 30px;
+    color: maroon;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.user-role {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+/* Hover zamanı Change Profile görünməsi */
+.hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: maroon;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 30px;
+}
+
+.user-profile-summary:hover .hover-overlay {
+    opacity: 1;
+}
+
+/* MƏRKƏZİ BÖLMƏ VƏ EYNİ ÖLÇÜLÜ DÜYMƏLƏR */
 .hero-container {
     text-align: center;
     display: flex;
@@ -25,16 +95,14 @@ body {
     margin: auto;
 }
 
-/* Böyüdülmüş Şəffaf Loqo Stili */
 .hero-logo-img {
-    height: 155px;
+    height: 150px;
     width: auto;
     object-fit: contain;
     margin-bottom: 12px;
     filter: drop-shadow(0 6px 15px rgba(0, 0, 0, 0.4));
 }
 
-/* Loqonun Altındakı Çərçivəsiz Ağ CE 58 Yazısı */
 .hero-course-text {
     color: #ffffff;
     font-size: 22px;
@@ -44,7 +112,7 @@ body {
 }
 
 .main-title {
-    font-size: 40px;
+    font-size: 38px;
     font-weight: 700;
     margin-bottom: 10px;
     color: #ffffff;
@@ -53,33 +121,43 @@ body {
 .sub-title {
     color: #94a3b8;
     margin-bottom: 30px;
-    font-size: 18px;
+    font-size: 17px;
 }
 
-/* Əsas Videolar Düyməsi */
-.main-video-btn {
+/* İki Düymənin Eyni Ölçüdə Olması */
+.action-buttons-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 320px;
+}
+
+.main-btn {
+    width: 100%;
     background: linear-gradient(135deg, maroon, #880e4f);
     color: white;
     border: none;
-    padding: 18px 50px;
-    font-size: 20px;
+    padding: 16px 0;
+    font-size: 19px;
     font-weight: 600;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(128, 0, 0, 0.5);
+    box-shadow: 0 8px 20px rgba(128, 0, 0, 0.4);
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    gap: 10px;
 }
 
-.main-video-btn:hover {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 15px 35px rgba(255, 144, 150, 0.4);
+.main-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 28px rgba(255, 144, 150, 0.4);
     background: linear-gradient(135deg, #a71d2a, maroon);
 }
 
-/* Səhifənin Ən Altındakı Müəllim İmza (Footer) */
+/* FOOTER */
 .page-footer {
     text-align: center;
     color: #94a3b8;
@@ -92,7 +170,7 @@ body {
     font-weight: 600;
 }
 
-/* Modal Pəncərə */
+/* MODALLAR VƏ OVERLAY */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -100,11 +178,16 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(8px);
     justify-content: center;
     align-items: center;
     z-index: 1000;
+}
+
+/* Giriş Pəncərəsinin Məcburi Görünməsi */
+.force-show {
+    display: flex !important;
 }
 
 .modal-box {
@@ -116,68 +199,138 @@ body {
     border-radius: 20px;
     padding: 30px;
     border: 1px solid #334155;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
     display: flex;
     flex-direction: column;
 }
 
-/* Modal Header */
+.small-modal {
+    max-width: 420px;
+}
+
+.chat-modal-box {
+    max-width: 600px;
+}
+
+/* AUTH / PAROL MODALI */
+.auth-box {
+    max-width: 400px;
+    text-align: center;
+}
+
+.auth-logo {
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.auth-header h2 {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.auth-header p {
+    color: #94a3b8;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.error-msg {
+    color: #ff4d4d;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+/* MODAL HEADER */
 .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 25px;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
     border-bottom: 1px solid #334155;
-    position: sticky;
-    top: 0;
-    background: #1e293b;
-    z-index: 10;
-}
-
-.header-titles {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
 }
 
 .badge-tag {
-    display: inline-block;
     background: maroon;
     color: rgb(255, 226, 173);
     padding: 4px 12px;
     border-radius: 12px;
     font-size: 12px;
     font-weight: bold;
-    width: fit-content;
 }
 
 .modal-main-title {
-    font-size: 26px;
+    font-size: 22px;
     color: #f8fafc;
     font-weight: 700;
-}
-
-.modal-sub-title {
-    font-size: 16px;
-    color: #94a3b8;
-    font-weight: 600;
 }
 
 .close-icon {
     background: none;
     border: none;
     color: #94a3b8;
-    font-size: 30px;
+    font-size: 28px;
     cursor: pointer;
-    transition: color 0.2s;
 }
 
 .close-icon:hover {
     color: #ff4d4d;
 }
 
-/* Video Siyahısı */
+/* FORM ELEMENTLƏRİ (PROFILE & PAROL) */
+.profile-form, .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.form-group input, .form-group textarea {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #fff;
+    outline: none;
+    font-size: 14px;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    border-color: maroon;
+}
+
+.save-btn {
+    background: maroon;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.save-btn:hover {
+    background: #a71d2a;
+}
+
+/* VİDEO SİYAHISI */
 .video-list {
     display: flex;
     flex-direction: column;
@@ -192,12 +345,6 @@ body {
     justify-content: space-between;
     align-items: center;
     border: 1px solid #1e293b;
-    transition: all 0.2s ease;
-}
-
-.video-item:hover {
-    border-color: maroon;
-    transform: translateX(4px);
 }
 
 .video-item .info {
@@ -205,14 +352,12 @@ body {
     align-items: center;
     gap: 12px;
     font-size: 15px;
-    font-weight: 500;
     color: #e2e8f0;
 }
 
 .video-item .info i {
     color: maroon;
-    font-size: 20px;
-    flex-shrink: 0;
+    font-size: 18px;
 }
 
 .link-btn {
@@ -223,11 +368,6 @@ body {
     border-radius: 8px;
     font-size: 13px;
     font-weight: 600;
-    transition: background 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
 }
 
 .link-btn:hover {
@@ -235,36 +375,152 @@ body {
     color: maroon;
 }
 
-/* Modal Footer */
+/* ÇAT HİSSƏSİ */
+.chat-messages {
+    max-height: 280px;
+    min-height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-right: 5px;
+    margin-bottom: 15px;
+}
+
+.chat-msg {
+    background: #0f172a;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border-left: 3px solid maroon;
+}
+
+.system-msg {
+    border-left: 3px solid #94a3b8;
+    color: #94a3b8;
+    font-size: 13px;
+    text-align: center;
+}
+
+.msg-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.msg-author-btn {
+    color: rgb(255, 226, 173);
+    font-weight: 600;
+    cursor: pointer;
+    transition: text-decoration 0.2s;
+}
+
+.msg-author-btn:hover {
+    text-decoration: underline;
+}
+
+.msg-time {
+    color: #64748b;
+}
+
+.msg-body {
+    font-size: 14px;
+    color: #e2e8f0;
+}
+
+.chat-input-box {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input-box input {
+    flex: 1;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #fff;
+    outline: none;
+}
+
+.send-btn {
+    background: maroon;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* BAŞQASININ PROFİLİNƏ BAXMA CARD-I */
+.view-profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.view-avatar {
+    font-size: 60px;
+    color: maroon;
+}
+
+.view-profile-card h3 {
+    color: #fff;
+    font-size: 20px;
+}
+
+.view-tag {
+    background: #0f172a;
+    color: rgb(255, 226, 173);
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 10px;
+    border: 1px solid #334155;
+}
+
+.view-about-box {
+    width: 100%;
+    background: #0f172a;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.view-about-box label {
+    font-size: 12px;
+    color: #94a3b8;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.view-about-box p {
+    font-size: 14px;
+    color: #e2e8f0;
+}
+
+/* FOOTER VƏ SCROLLBAR */
 .modal-footer {
-    margin-top: 25px;
-    padding-top: 15px;
+    margin-top: 20px;
+    padding-top: 12px;
     border-top: 1px solid #334155;
     text-align: center;
-    font-size: 15px;
+    font-size: 14px;
     color: #94a3b8;
 }
 
 .modal-footer span {
     color: rgb(255, 226, 173);
-    font-weight: 600;
 }
 
-/* Scrollbar */
-.modal-box::-webkit-scrollbar {
-    width: 8px;
+.modal-box::-webkit-scrollbar, .chat-messages::-webkit-scrollbar {
+    width: 6px;
 }
 
-.modal-box::-webkit-scrollbar-track {
-    background: #0f172a;
-    border-radius: 10px;
-}
-
-.modal-box::-webkit-scrollbar-thumb {
+.modal-box::-webkit-scrollbar-thumb, .chat-messages::-webkit-scrollbar-thumb {
     background: maroon;
     border-radius: 10px;
-}
-
-.modal-box::-webkit-scrollbar-thumb:hover {
-    background: #a71d2a;
 }
