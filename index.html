@@ -57,7 +57,7 @@
         </div>
     </header>
 
-    <!-- MƏRKƏZİ BÖLMƏ -->
+    <!-- MƏRKƏZİ GİRİŞ EKRANI (İstədiyin yazı buradadır) -->
     <div class="hero-container">
         <img src="Jet School Loqo.png" alt="Jet School Logo" class="hero-logo-img">
         <div class="hero-course-text">CE 58</div>
@@ -75,7 +75,7 @@
     </div>
 
     <footer class="page-footer">
-        <p>Müəllim: <span>Rasim İsmayılov</span></p>
+        <p>Müəllim: <span>Rasim İsmayılov</span>[cite: 1]</p>
     </footer>
 
     <!-- PROFİL DƏYİŞMƏ MODALI -->
@@ -103,31 +103,6 @@
                     <textarea id="aboutInput" rows="3" placeholder="Özünüz haqqında qısa məlumat yaza bilərsiniz..."></textarea>
                 </div>
                 <button type="button" id="saveProfileBtn" class="save-btn"><i class="fas fa-save"></i> Yadda Saxla</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- BAŞQASININ PROFİLİNƏ BAXMA MODALI -->
-    <div id="viewProfileModal" class="modal-overlay">
-        <div class="modal-box small-modal">
-            <div class="modal-header">
-                <h2 class="modal-main-title"><i class="fas fa-id-card"></i> İstifadəçi Profili</h2>
-                <button type="button" id="closeViewProfileBtn" class="close-icon">&times;</button>
-            </div>
-            <div class="view-profile-card">
-                <div class="view-avatar-container" id="viewAvatarContainer">
-                    <i class="fas fa-user-circle view-avatar" id="viewAvatarIcon"></i>
-                    <img id="viewAvatarImg" class="view-avatar-img" src="" alt="Profil Şəkli" style="display: none;">
-                </div>
-                <h3 id="viewFullName">Ad Soyad</h3>
-                <span class="view-tag">Jet School CE 58</span>
-                <div class="view-about-box">
-                    <label>Haqqında:</label>
-                    <p id="viewAboutText">Məlumat qeyd edilməyib.</p>
-                </div>
-                <div class="profile-actions">
-                    <button type="button" id="addContactBtn" class="action-btn add-btn"><i class="fas fa-user-plus"></i> Əlavə Et</button>
-                </div>
             </div>
         </div>
     </div>
@@ -164,18 +139,19 @@
             </div>
 
             <div class="modal-footer">
-                <p>Müəllim: <span>Rasim İsmayılov</span></p>
+                <p>Müəllim: <span>Rasim İsmayılov</span>[cite: 1]</p>
             </div>
         </div>
     </div>
 
-    <!-- ÇAT MODALI -->
+    <!-- ÇAT MODALI (Çat pəncərəsinin üzərindəki başqa yazı) -->
     <div id="chatModal" class="modal-overlay">
         <div class="modal-box chat-modal-box large-chat-box">
             <div class="modal-header">
                 <div class="header-titles">
-                    <span class="badge-tag" id="chatHeaderBadge">Ümumi Müzakirə</span>
-                    <h2 class="modal-main-title" id="chatHeaderTitle"><i class="fas fa-comments"></i> Qrup Çatı (CE 58)</h2>
+                    <span class="badge-tag" id="chatHeaderBadge">CE 58 Qrupu</span>
+                    <h2 class="modal-main-title" id="chatHeaderTitle"><i class="fas fa-comments"></i> Sinif İçi Canlı Müzakirə</h2>
+                    <h3 class="modal-sub-title" id="chatHeaderSub">Fikirlərinizi bölüşün, şəkil və fayl göndərin</h3>
                 </div>
                 <button type="button" id="closeChatBtn" class="close-icon">&times;</button>
             </div>
@@ -214,7 +190,7 @@
             </div>
 
             <div class="modal-footer">
-                <p>Müəllim: <span>Rasim İsmayılov</span></p>
+                <p>Müəllim: <span>Rasim İsmayılov</span>[cite: 1]</p>
             </div>
         </div>
     </div>
@@ -245,13 +221,6 @@
 
         loginBtn.onclick = checkLogin;
         passInput.onkeypress = (e) => { if (e.key === 'Enter') checkLogin(); };
-
-        function showNotification(title, text) {
-            document.getElementById('notifTitle').textContent = title;
-            document.getElementById('notifText').textContent = text;
-            notificationToast.classList.add('show');
-            setTimeout(() => { notificationToast.classList.remove('show'); }, 4000);
-        }
 
         let myProfile = JSON.parse(localStorage.getItem('myJetProfile')) || {
             firstName: '',
@@ -330,7 +299,7 @@
         const closeChatBtn = document.getElementById('closeChatBtn');
 
         openVideosBtn.onclick = () => { videoModal.style.display = 'flex'; };
-        openChatBtn.onclick = () => { chatModal.style.display = 'flex'; loadContacts(); };
+        openChatBtn.onclick = () => { chatModal.style.display = 'flex'; };
 
         closeVideoBtn.onclick = () => { videoModal.style.display = 'none'; };
         closeChatBtn.onclick = () => { chatModal.style.display = 'none'; };
@@ -389,7 +358,6 @@
                 fileName: selectedFileName
             };
 
-            // Mesajı serverə göndəririk
             socket.emit('send_message', messageObj);
 
             chatInput.value = '';
@@ -399,7 +367,6 @@
         sendBtn.onclick = sendMessage;
         chatInput.onkeypress = (e) => { if (e.key === 'Enter') sendMessage(); };
 
-        // Serverdən mesaj gələndə ekrana yazdırırıq
         socket.on('receive_message', (msg) => {
             appendMessageToDOM(msg.name, msg.about, msg.avatar, msg.text, msg.time, msg.fileData, msg.fileType, msg.fileName);
         });
@@ -434,10 +401,6 @@
 
             chatMessages.appendChild(msgDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function loadContacts() {
-            // Kontaktlar paneli
         }
     </script>
 </body>
