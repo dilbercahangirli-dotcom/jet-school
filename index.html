@@ -30,10 +30,13 @@
     <!-- YUXARI PROFİL PANELİ -->
     <header class="top-bar">
         <div id="profileTrigger" class="user-profile-summary">
-            <i class="fas fa-user-circle avatar-icon"></i>
+            <div class="avatar-container" id="headerAvatarContainer">
+                <i class="fas fa-user-circle avatar-icon" id="headerAvatarIcon"></i>
+                <img id="headerAvatarImg" class="avatar-img" src="" alt="Profil Şəkli" style="display: none;">
+            </div>
             <div class="user-info">
-                <span id="userNameText" class="user-name">Dilbər Cahangirli</span>
-                <span id="userRoleText" class="user-role">Class 6A | Programmer</span>
+                <span id="userNameText" class="user-name">Şagird</span>
+                <span id="userRoleText" class="user-role">Class 6A | CE 58</span>
             </div>
             <div class="hover-overlay">
                 <i class="fas fa-edit"></i>
@@ -66,7 +69,7 @@
 
     <!-- SƏHİFƏNİN ƏN ALTI (Footer) -->
     <footer class="page-footer">
-        <p>Müəllim: <span>Rasim İsmayılov</span></p>
+        <p>Müəllim: <span>Rasim İsmayılov</span>[cite: 1]</p>
     </footer>
 
     <!-- PROFİL DƏYİŞMƏ MODALI -->
@@ -77,13 +80,17 @@
                 <button type="button" id="closeProfileBtn" class="close-icon">&times;</button>
             </div>
             <div class="profile-form">
+                <div class="form-group avatar-upload-group">
+                    <label>Profil Şəkli Seç:</label>
+                    <input type="file" id="avatarFileInput" accept="image/*">
+                </div>
                 <div class="form-group">
                     <label for="firstNameInput">Name (Ad):</label>
-                    <input type="text" id="firstNameInput" placeholder="Məsələn: Dilbər" required>
+                    <input type="text" id="firstNameInput" placeholder="Məsələn: Əli" required>
                 </div>
                 <div class="form-group">
                     <label for="lastNameInput">Last Name (Soyad):</label>
-                    <input type="text" id="lastNameInput" placeholder="Məsələn: Cahangirli">
+                    <input type="text" id="lastNameInput" placeholder="Məsələn: Məmmədov">
                 </div>
                 <div class="form-group">
                     <label for="aboutInput">About (Haqqında):</label>
@@ -102,7 +109,10 @@
                 <button type="button" id="closeViewProfileBtn" class="close-icon">&times;</button>
             </div>
             <div class="view-profile-card">
-                <i class="fas fa-user-circle view-avatar"></i>
+                <div class="view-avatar-container" id="viewAvatarContainer">
+                    <i class="fas fa-user-circle view-avatar" id="viewAvatarIcon"></i>
+                    <img id="viewAvatarImg" class="view-avatar-img" src="" alt="Profil Şəkli" style="display: none;">
+                </div>
                 <h3 id="viewFullName">Ad Soyad</h3>
                 <span class="view-tag">Jet School CE 58</span>
                 <div class="view-about-box">
@@ -213,7 +223,7 @@
             </div>
 
             <div class="modal-footer">
-                <p>Müəllim: <span>Rasim İsmayılov</span></p>
+                <p>Müəllim: <span>Rasim İsmayılov</span>[cite: 1]</p>
             </div>
         </div>
     </div>
@@ -241,7 +251,7 @@
             </div>
 
             <div class="modal-footer">
-                <p>Müəllim: <span>Rasim İsmayılov</span></p>
+                <p>Müəllim: <span>Rasim İsmayılov</span>[cite: 1]</p>
             </div>
         </div>
     </div>
@@ -274,11 +284,12 @@
             }
         };
 
-        // PROFİL SİSTEMİ
+        // PROFİL SİSTEMİ (Default olaraq boş / şagird)
         let myProfile = JSON.parse(localStorage.getItem('myJetProfile')) || {
-            firstName: 'Dilbər',
-            lastName: 'Cahangirli',
-            about: 'Class 6A | Programmer'
+            firstName: '',
+            lastName: '',
+            about: '',
+            avatar: ''
         };
 
         const userNameText = document.getElementById('userNameText');
@@ -291,13 +302,28 @@
         const firstNameInput = document.getElementById('firstNameInput');
         const lastNameInput = document.getElementById('lastNameInput');
         const aboutInput = document.getElementById('aboutInput');
+        const avatarFileInput = document.getElementById('avatarFileInput');
+
+        const headerAvatarIcon = document.getElementById('headerAvatarIcon');
+        const headerAvatarImg = document.getElementById('headerAvatarImg');
 
         function updateMyProfileUI() {
-            userNameText.textContent = `${myProfile.firstName} ${myProfile.lastName}`.trim();
-            userRoleText.textContent = myProfile.about || 'Şagird';
+            const fullName = `${myProfile.firstName} ${myProfile.lastName}`.trim();
+            userNameText.textContent = fullName || 'Şagird';
+            userRoleText.textContent = myProfile.about || 'Class 6A | CE 58';
+            
             firstNameInput.value = myProfile.firstName;
             lastNameInput.value = myProfile.lastName;
             aboutInput.value = myProfile.about;
+
+            if (myProfile.avatar) {
+                headerAvatarImg.src = myProfile.avatar;
+                headerAvatarImg.style.display = 'block';
+                headerAvatarIcon.style.display = 'none';
+            } else {
+                headerAvatarImg.style.display = 'none';
+                headerAvatarIcon.style.display = 'block';
+            }
         }
         updateMyProfileUI();
 
@@ -305,6 +331,20 @@
         closeProfileBtn.onclick = () => { profileModal.style.display = 'none'; };
 
         saveProfileBtn.onclick = () => {
+            const file = avatarFileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    myProfile.avatar = e.target.result;
+                    saveProfileData();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                saveProfileData();
+            }
+        };
+
+        function saveProfileData() {
             myProfile.firstName = firstNameInput.value.trim() || 'İstifadəçi';
             myProfile.lastName = lastNameInput.value.trim();
             myProfile.about = aboutInput.value.trim();
@@ -312,7 +352,7 @@
             localStorage.setItem('myJetProfile', JSON.stringify(myProfile));
             updateMyProfileUI();
             profileModal.style.display = 'none';
-        };
+        }
 
         // DÜYMƏLƏR VƏ MODALLAR
         const openVideosBtn = document.getElementById('openVideosBtn');
@@ -325,8 +365,7 @@
         openVideosBtn.onclick = () => { videoModal.style.display = 'flex'; };
         openChatBtn.onclick = () => { chatModal.style.display = 'flex'; };
 
-        closeVideoModal = () => { videoModal.style.display = 'none'; };
-        closeVideoBtn.onclick = closeVideoModal;
+        closeVideoBtn.onclick = () => { videoModal.style.display = 'none'; };
         closeChatBtn.onclick = () => { chatModal.style.display = 'none'; };
 
         // BAŞQASININ PROFİLİNƏ BAXMA
@@ -334,48 +373,61 @@
         const closeViewProfileBtn = document.getElementById('closeViewProfileBtn');
         const viewFullName = document.getElementById('viewFullName');
         const viewAboutText = document.getElementById('viewAboutText');
+        const viewAvatarIcon = document.getElementById('viewAvatarIcon');
+        const viewAvatarImg = document.getElementById('viewAvatarImg');
 
         closeViewProfileBtn.onclick = () => { viewProfileModal.style.display = 'none'; };
 
-        function openUserCard(name, about) {
+        function openUserCard(name, about, avatar) {
             viewFullName.textContent = name;
             viewAboutText.textContent = about || 'Haqqında məlumat qeyd olunmayıb.';
+            
+            if (avatar) {
+                viewAvatarImg.src = avatar;
+                viewAvatarImg.style.display = 'block';
+                viewAvatarIcon.style.display = 'none';
+            } else {
+                viewAvatarImg.style.display = 'none';
+                viewAvatarIcon.style.display = 'block';
+            }
             viewProfileModal.style.display = 'flex';
         }
 
-        // ÇAT VƏ YADDAŞ (Lokal Saxlama)
+        // ÇAT VƏ YADDAŞ
         const chatInput = document.getElementById('chatInput');
         const sendBtn = document.getElementById('sendBtn');
         const chatMessages = document.getElementById('chatMessages');
 
-        // Yaddaşda saxlanılan mesajları yükləmək
         function loadMessages() {
             const savedMessages = JSON.parse(localStorage.getItem('jetChatMessages')) || [];
-            // Sistem mesajından sonra əlavə etmək üçün əvvəlcə təmizləyirik
             chatMessages.innerHTML = `
                 <div class="chat-msg system-msg">
                     <span>Çata xoş gəlmisiniz! Profili görmək üçün mesaj yazan şəxsin adına klikləyin.</span>
                 </div>
             `;
             savedMessages.forEach(msg => {
-                appendMessageToDOM(msg.name, msg.about, msg.text, msg.time);
+                appendMessageToDOM(msg.name, msg.about, msg.avatar, msg.text, msg.time);
             });
         }
 
-        function appendMessageToDOM(name, about, text, timeStr) {
+        function appendMessageToDOM(name, about, avatar, text, timeStr) {
             const msgDiv = document.createElement('div');
             msgDiv.className = 'chat-msg';
             
+            const avatarHtml = avatar 
+                ? `<img src="${avatar}" class="msg-avatar-img" alt="avatar">` 
+                : `<i class="fas fa-user-circle msg-avatar-icon"></i>`;
+
             msgDiv.innerHTML = `
                 <div class="msg-header">
-                    <span class="msg-author-btn"><i class="fas fa-user"></i> ${name}</span>
+                    <span class="msg-author-btn">${avatarHtml} <b>${name}</b></span>
                     <span class="msg-time">${timeStr}</span>
                 </div>
                 <div class="msg-body">${text}</div>
             `;
 
             msgDiv.querySelector('.msg-author-btn').onclick = () => {
-                openUserCard(name, about);
+                openUserCard(name, about, avatar);
             };
 
             chatMessages.appendChild(msgDiv);
@@ -387,17 +439,17 @@
             if (!text) return;
 
             const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            const fullName = `${myProfile.firstName} ${myProfile.lastName}`.trim();
+            const fullName = `${myProfile.firstName} ${myProfile.lastName}`.trim() || 'İstifadəçi';
             const aboutData = myProfile.about;
+            const avatarData = myProfile.avatar;
 
-            const messageObj = { name: fullName, about: aboutData, text: text, time: timeStr };
+            const messageObj = { name: fullName, about: aboutData, avatar: avatarData, text: text, time: timeStr };
 
-            // Yaddaşa yazmaq
             const savedMessages = JSON.parse(localStorage.getItem('jetChatMessages')) || [];
             savedMessages.push(messageObj);
             localStorage.setItem('jetChatMessages', JSON.stringify(savedMessages));
 
-            appendMessageToDOM(fullName, aboutData, text, timeStr);
+            appendMessageToDOM(fullName, aboutData, avatarData, text, timeStr);
             chatInput.value = '';
         }
 
@@ -406,10 +458,8 @@
             if (e.key === 'Enter') sendMessage();
         };
 
-        // Səhifə açıldıqda mesajları yüklə
         loadMessages();
 
-        // Pəncərədən çölə kliklədikdə bağlanma
         window.onclick = (event) => {
             if (event.target === videoModal) videoModal.style.display = 'none';
             if (event.target === chatModal) chatModal.style.display = 'none';
