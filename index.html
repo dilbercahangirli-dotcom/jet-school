@@ -27,6 +27,15 @@
         </div>
     </div>
 
+    <!-- BİLDİRİŞ QUTUSU -->
+    <div id="notificationToast" class="notification-toast">
+        <i class="fas fa-bell"></i>
+        <div>
+            <h4 id="notifTitle">Yeni Mesaj</h4>
+            <p id="notifText">Kimsə mesaj yazdı...</p>
+        </div>
+    </div>
+
     <!-- YUXARI PROFİL PANELİ -->
     <header class="top-bar">
         <div id="profileTrigger" class="user-profile-summary">
@@ -119,6 +128,11 @@
                     <label>Haqqında:</label>
                     <p id="viewAboutText">Məlumat qeyd edilməyib.</p>
                 </div>
+                <!-- ƏLAVƏ ET VƏ ŞƏXSİYƏ MESAJ YAZ DÜYMƏLƏRİ -->
+                <div class="profile-actions">
+                    <button type="button" id="addContactBtn" class="action-btn add-btn"><i class="fas fa-user-plus"></i> Əlavə Et</button>
+                    <button type="button" id="dmFromProfileBtn" class="action-btn dm-btn"><i class="fas fa-paper-plane"></i> Şəxsiyə Yaz</button>
+                </div>
             </div>
         </div>
     </div>
@@ -136,6 +150,7 @@
             </div>
             
             <div class="video-list">
+                <!-- Dərslər siyahısı eyni qalır -->
                 <div class="video-item">
                     <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 1. Tanışlıq, Kompüterin növləri</span></div>
                     <a href="https://youtu.be/sBwt2dKCDlQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
@@ -228,26 +243,54 @@
         </div>
     </div>
 
-    <!-- ÇAT MODALI -->
+    <!-- ÇAT MODALI (SOLDA KONTAKTLAR + SAĞDA SÖHBƏT) -->
     <div id="chatModal" class="modal-overlay">
-        <div class="modal-box chat-modal-box">
+        <div class="modal-box chat-modal-box large-chat-box">
             <div class="modal-header">
                 <div class="header-titles">
-                    <span class="badge-tag">Müzakirə</span>
-                    <h2 class="modal-main-title"><i class="fas fa-comments"></i> Qrup Çatı (CE 58)</h2>
+                    <span class="badge-tag" id="chatHeaderBadge">Ümumi Müzakirə</span>
+                    <h2 class="modal-main-title" id="chatHeaderTitle"><i class="fas fa-comments"></i> Qrup Çatı (CE 58)</h2>
                 </div>
                 <button type="button" id="closeChatBtn" class="close-icon">&times;</button>
             </div>
             
-            <div id="chatMessages" class="chat-messages">
-                <div class="chat-msg system-msg">
-                    <span>Çata xoş gəlmisiniz! Profili görmək üçün mesaj yazan şəxsin adına klikləyin.</span>
+            <div class="chat-layout-container">
+                <!-- SOL TARƏF: KONTAKTLAR -->
+                <div class="contacts-sidebar">
+                    <h3><i class="fas fa-address-book"></i> Kontaktlar</h3>
+                    <div class="contact-item active-contact" id="globalChatTab">
+                        <i class="fas fa-users"></i> Ümumi Çat
+                    </div>
+                    <div id="contactsList" class="contacts-list">
+                        <!-- Əlavə edilən şəxslər bura düşəcək -->
+                    </div>
                 </div>
-            </div>
 
-            <div class="chat-input-box">
-                <input type="text" id="chatInput" placeholder="Mesajınızı yazın..." maxlength="250">
-                <button type="button" id="sendBtn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+                <!-- SAĞ TARƏF: MESAJLAR VƏ GÖNDƏRMƏ -->
+                <div class="chat-main-area">
+                    <div id="chatMessages" class="chat-messages">
+                        <div class="chat-msg system-msg">
+                            <span>Çata xoş gəlmisiniz! Şəkil, video və ya fayl göndərə bilərsiniz.</span>
+                        </div>
+                    </div>
+
+                    <!-- Fayl önizləmə sahəsi -->
+                    <div id="filePreviewContainer" class="file-preview-container" style="display: none;">
+                        <span id="fileNamePreview">Fayl seçildi</span>
+                        <button type="button" id="removeFileBtn">&times;</button>
+                    </div>
+
+                    <div class="chat-input-box">
+                        <!-- Fayl/Şəkil/Video yükləmək üçün düymə -->
+                        <label for="chatFileInput" class="file-attach-btn" title="Şəkil, Video və ya Fayl yüklə">
+                            <i class="fas fa-paperclip"></i>
+                        </label>
+                        <input type="file" id="chatFileInput" accept="image/*,video/*,.pdf,.doc,.docx,.txt" style="display: none;">
+
+                        <input type="text" id="chatInput" placeholder="Mesajınızı yazın..." maxlength="250">
+                        <button type="button" id="sendBtn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
             </div>
 
             <div class="modal-footer">
@@ -262,6 +305,7 @@
         const loginBtn = document.getElementById('loginBtn');
         const passInput = document.getElementById('passInput');
         const errorMsg = document.getElementById('errorMsg');
+        const notificationToast = document.getElementById('notificationToast');
 
         if (sessionStorage.getItem('authenticated') === 'true') {
             authModal.classList.add('hidden');
@@ -278,13 +322,19 @@
         }
 
         loginBtn.onclick = checkLogin;
-        passInput.onkeypress = function(e) {
-            if (e.key === 'Enter') {
-                checkLogin();
-            }
-        };
+        passInput.onkeypress = (e) => { if (e.key === 'Enter') checkLogin(); };
 
-        // PROFİL SİSTEMİ (Default olaraq boş / şagird)
+        // BİLDİRİŞ GÖSTəRMƏ
+        function showNotification(title, text) {
+            document.getElementById('notifTitle').textContent = title;
+            document.getElementById('notifText').textContent = text;
+            notificationToast.classList.add('show');
+            setTimeout(() => {
+                notificationToast.classList.remove('show');
+            }, 4000);
+        }
+
+        // PROFİL SİSTEMİ
         let myProfile = JSON.parse(localStorage.getItem('myJetProfile')) || {
             firstName: '',
             lastName: '',
@@ -363,22 +413,27 @@
         const closeChatBtn = document.getElementById('closeChatBtn');
 
         openVideosBtn.onclick = () => { videoModal.style.display = 'flex'; };
-        openChatBtn.onclick = () => { chatModal.style.display = 'flex'; };
+        openChatBtn.onclick = () => { chatModal.style.display = 'flex'; loadContacts(); };
 
         closeVideoBtn.onclick = () => { videoModal.style.display = 'none'; };
         closeChatBtn.onclick = () => { chatModal.style.display = 'none'; };
 
-        // BAŞQASININ PROFİLİNƏ BAXMA
+        // BAŞQASININ PROFİLİNƏ BAXMA VƏ ƏLAVƏ ET / ŞƏXSİYƏ YAZ
         const viewProfileModal = document.getElementById('viewProfileModal');
         const closeViewProfileBtn = document.getElementById('closeViewProfileBtn');
         const viewFullName = document.getElementById('viewFullName');
         const viewAboutText = document.getElementById('viewAboutText');
         const viewAvatarIcon = document.getElementById('viewAvatarIcon');
         const viewAvatarImg = document.getElementById('viewAvatarImg');
+        const addContactBtn = document.getElementById('addContactBtn');
+        const dmFromProfileBtn = document.getElementById('dmFromProfileBtn');
+
+        let viewingUser = null;
 
         closeViewProfileBtn.onclick = () => { viewProfileModal.style.display = 'none'; };
 
         function openUserCard(name, about, avatar) {
+            viewingUser = { name, about, avatar };
             viewFullName.textContent = name;
             viewAboutText.textContent = about || 'Haqqında məlumat qeyd olunmayıb.';
             
@@ -390,27 +445,155 @@
                 viewAvatarImg.style.display = 'none';
                 viewAvatarIcon.style.display = 'block';
             }
+
+            // Öz profilidirsə Əlavə et düyməsini gizlət
+            const myFullName = `${myProfile.firstName} ${myProfile.lastName}`.trim();
+            if (name === myFullName) {
+                addContactBtn.style.display = 'none';
+                dmFromProfileBtn.style.display = 'none';
+            } else {
+                addContactBtn.style.display = 'flex';
+                dmFromProfileBtn.style.display = 'flex';
+                checkIfContactExists(name);
+            }
+
             viewProfileModal.style.display = 'flex';
         }
 
-        // ÇAT VƏ YADDAŞ
-        const chatInput = document.getElementById('chatInput');
-        const sendBtn = document.getElementById('sendBtn');
-        const chatMessages = document.getElementById('chatMessages');
+        // Kontaktları idarə etmək
+        function getContacts() {
+            return JSON.parse(localStorage.getItem('jetContacts')) || [];
+        }
 
-        function loadMessages() {
-            const savedMessages = JSON.parse(localStorage.getItem('jetChatMessages')) || [];
-            chatMessages.innerHTML = `
-                <div class="chat-msg system-msg">
-                    <span>Çata xoş gəlmisiniz! Profili görmək üçün mesaj yazan şəxsin adına klikləyin.</span>
-                </div>
-            `;
-            savedMessages.forEach(msg => {
-                appendMessageToDOM(msg.name, msg.about, msg.avatar, msg.text, msg.time);
+        function checkIfContactExists(name) {
+            const contacts = getContacts();
+            const exists = contacts.some(c => c.name === name);
+            if (exists) {
+                addContactBtn.innerHTML = '<i class="fas fa-check"></i> Əlavə olunub';
+                addContactBtn.style.background = '#059669';
+            } else {
+                addContactBtn.innerHTML = '<i class="fas fa-user-plus"></i> Əlavə Et';
+                addContactBtn.style.background = 'maroon';
+            }
+        }
+
+        addContactBtn.onclick = () => {
+            if (!viewingUser) return;
+            let contacts = getContacts();
+            const exists = contacts.some(c => c.name === viewingUser.name);
+            if (!exists) {
+                contacts.push(viewingUser);
+                localStorage.setItem('jetContacts', JSON.stringify(contacts));
+                showNotification('Uğurlu!', `${viewingUser.name} kontaktlara əlavə edildi.`);
+                checkIfContactExists(viewingUser.name);
+                loadContacts();
+            }
+        };
+
+        dmFromProfileBtn.onclick = () => {
+            if (!viewingUser) return;
+            viewProfileModal.style.display = 'none';
+            chatModal.style.display = 'flex';
+            openPrivateChat(viewingUser.name);
+        };
+
+        function loadContacts() {
+            const contactsList = document.getElementById('contactsList');
+            const contacts = getContacts();
+            contactsList.innerHTML = '';
+
+            contacts.forEach(c => {
+                const item = document.createElement('div');
+                item.className = 'contact-item';
+                const avatarTag = c.avatar ? `<img src="${c.avatar}" class="contact-avatar">` : `<i class="fas fa-user-circle"></i>`;
+                item.innerHTML = `${avatarTag} <span>${c.name}</span>`;
+                item.onclick = () => {
+                    document.querySelectorAll('.contact-item').forEach(el => el.classList.remove('active-contact'));
+                    item.classList.add('active-contact');
+                    openPrivateChat(c.name);
+                };
+                contactsList.appendChild(item);
             });
         }
 
-        function appendMessageToDOM(name, about, avatar, text, timeStr) {
+        // ÇAT VƏ ŞƏXSİ SÖHBƏT (DM) / FAYL GÖNDƏRMƏ
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatFileInput = document.getElementById('chatFileInput');
+        const filePreviewContainer = document.getElementById('filePreviewContainer');
+        const fileNamePreview = document.getElementById('fileNamePreview');
+        const removeFileBtn = document.getElementById('removeFileBtn');
+        const globalChatTab = document.getElementById('globalChatTab');
+        const chatHeaderTitle = document.getElementById('chatHeaderTitle');
+        const chatHeaderBadge = document.getElementById('chatHeaderBadge');
+
+        let currentChatTarget = 'global'; // 'global' və ya şəxsin adı
+        let selectedFileBase64 = null;
+        let selectedFileType = null;
+        let selectedFileName = null;
+
+        globalChatTab.onclick = () => {
+            document.querySelectorAll('.contact-item').forEach(el => el.classList.remove('active-contact'));
+            globalChatTab.classList.add('active-contact');
+            currentChatTarget = 'global';
+            chatHeaderBadge.textContent = 'Ümumi Müzakirə';
+            chatHeaderTitle.innerHTML = '<i class="fas fa-comments"></i> Qrup Çatı (CE 58)';
+            loadMessages();
+        };
+
+        function openPrivateChat(targetName) {
+            currentChatTarget = targetName;
+            chatHeaderBadge.textContent = 'Şəxsi Söhbət (DM)';
+            chatHeaderTitle.innerHTML = `<i class="fas fa-user-lock"></i> ${targetName}`;
+            loadMessages();
+        }
+
+        chatFileInput.onchange = (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                selectedFileName = file.name;
+                selectedFileType = file.type;
+                const reader = new FileReader();
+                reader.onload = function(uploadEvent) {
+                    selectedFileBase64 = uploadEvent.target.result;
+                    fileNamePreview.textContent = `Seçildi: ${selectedFileName}`;
+                    filePreviewContainer.style.display = 'flex';
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+
+        removeFileBtn.onclick = () => {
+            selectedFileBase64 = null;
+            selectedFileType = null;
+            selectedFileName = null;
+            chatFileInput.value = '';
+            filePreviewContainer.style.display = 'none';
+        };
+
+        function getStorageKey() {
+            if (currentChatTarget === 'global') return 'jetChatMessages';
+            // Şəxsi söhbət üçün unik açar yaradırıq
+            const myName = `${myProfile.firstName} ${myProfile.lastName}`.trim() || 'İstifadəçi';
+            const users = [myName, currentChatTarget].sort();
+            return `jetDM_${users[0]}_${users[1]}`;
+        }
+
+        function loadMessages() {
+            const storageKey = getStorageKey();
+            const savedMessages = JSON.parse(localStorage.getItem(storageKey)) || [];
+            chatMessages.innerHTML = `
+                <div class="chat-msg system-msg">
+                    <span>${currentChatTarget === 'global' ? 'Ümumi çata xoş gəlmisiniz!' : currentChatTarget + ' ilə şəxsi söhbət'}</span>
+                </div>
+            `;
+            savedMessages.forEach(msg => {
+                appendMessageToDOM(msg.name, msg.about, msg.avatar, msg.text, msg.time, msg.fileData, msg.fileType, msg.fileName);
+            });
+        }
+
+        function appendMessageToDOM(name, about, avatar, text, timeStr, fileData, fileType, fileName) {
             const msgDiv = document.createElement('div');
             msgDiv.className = 'chat-msg';
             
@@ -418,12 +601,24 @@
                 ? `<img src="${avatar}" class="msg-avatar-img" alt="avatar">` 
                 : `<i class="fas fa-user-circle msg-avatar-icon"></i>`;
 
+            let mediaHtml = '';
+            if (fileData) {
+                if (fileType && fileType.startsWith('image/')) {
+                    mediaHtml = `<div class="msg-media"><img src="${fileData}" alt="şəkil"></div>`;
+                } else if (fileType && fileType.startsWith('video/')) {
+                    mediaHtml = `<div class="msg-media"><video controls src="${fileData}"></video></div>`;
+                } else {
+                    mediaHtml = `<div class="msg-file-link"><a href="${fileData}" download="${fileName}"><i class="fas fa-file-download"></i> ${fileName || 'Faylı yüklə'}</a></div>`;
+                }
+            }
+
             msgDiv.innerHTML = `
                 <div class="msg-header">
                     <span class="msg-author-btn">${avatarHtml} <b>${name}</b></span>
                     <span class="msg-time">${timeStr}</span>
                 </div>
                 <div class="msg-body">${text}</div>
+                ${mediaHtml}
             `;
 
             msgDiv.querySelector('.msg-author-btn').onclick = () => {
@@ -436,29 +631,46 @@
 
         function sendMessage() {
             const text = chatInput.value.trim();
-            if (!text) return;
+            if (!text && !selectedFileBase64) return;
 
             const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             const fullName = `${myProfile.firstName} ${myProfile.lastName}`.trim() || 'İstifadəçi';
             const aboutData = myProfile.about;
             const avatarData = myProfile.avatar;
 
-            const messageObj = { name: fullName, about: aboutData, avatar: avatarData, text: text, time: timeStr };
+            const messageObj = { 
+                name: fullName, 
+                about: aboutData, 
+                avatar: avatarData, 
+                text: text, 
+                time: timeStr,
+                fileData: selectedFileBase64,
+                fileType: selectedFileType,
+                fileName: selectedFileName
+            };
 
-            const savedMessages = JSON.parse(localStorage.getItem('jetChatMessages')) || [];
+            const storageKey = getStorageKey();
+            const savedMessages = JSON.parse(localStorage.getItem(storageKey)) || [];
             savedMessages.push(messageObj);
-            localStorage.setItem('jetChatMessages', JSON.stringify(savedMessages));
+            localStorage.setItem(storageKey, JSON.stringify(savedMessages));
 
-            appendMessageToDOM(fullName, aboutData, avatarData, text, timeStr);
+            appendMessageToDOM(fullName, aboutData, avatarData, text, timeStr, selectedFileBase64, selectedFileType, selectedFileName);
+            
+            // Əgər ümumi çatap yazılmırsa və ya ümumi çatap yazılırsa bildiriş simulyasiyası
+            if (currentChatTarget === 'global') {
+                showNotification('Yeni Qrup Mesajı', `${fullName}: ${text || 'Fayl göndərildi'}`);
+            }
+
+            // Təmizləmə
             chatInput.value = '';
+            removeFileBtn.click();
         }
 
         sendBtn.onclick = sendMessage;
-        chatInput.onkeypress = (e) => {
-            if (e.key === 'Enter') sendMessage();
-        };
+        chatInput.onkeypress = (e) => { if (e.key === 'Enter') sendMessage(); };
 
         loadMessages();
+        loadContacts();
 
         window.onclick = (event) => {
             if (event.target === videoModal) videoModal.style.display = 'none';
