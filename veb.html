@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Portal - Jet School</title>
+    <link rel="stylesheet" href="veb.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Mərkəzi Bölmə -->
+    <div class="hero-container">
+        <!-- Böyüdülmüş Şəffaf Loqo -->
+        <img src="Jet School Loqo.png" alt="Jet School Logo" class="hero-logo-img">
+        
+        <!-- Loqonun Altında Çərçivəsiz Ağ CE 58 -->
+        <div class="hero-course-text">CE 58</div>
+        
+        <h1 class="main-title">Video Kolleksiyası</h1>
+        <p class="sub-title">Bütün dərslərə və faydalı keçidlərə bir kliklə baxın</p>
+        
+        <!-- Videolar Düyməsi -->
+        <button id="openBtn" class="main-video-btn">
+            <i class="fab fa-youtube"></i> Videolar
+        </button>
+    </div>
+
+    <!-- Səhifənin Ən Altı (Footer) -->
+    <footer class="page-footer">
+        <p>Müəllim: <span>Rasim İsmayılaov</span></p>
+    </footer>
+
+    <!-- Modallı Video Pəncərəsi -->
+    <div id="videoModal" class="modal-overlay">
+        <div class="modal-box">
+            
+            <!-- Modal Yuxarı Hissəsi -->
+            <div class="modal-header">
+                <div class="header-titles">
+                    <span class="badge-tag">Jet School</span>
+                    <h2 class="modal-main-title">Dərslər və Keçidlər</h2>
+                    <h3 class="modal-sub-title">CE 58</h3>
+                </div>
+                <button id="closeBtn" class="close-icon">&times;</button>
+            </div>
+            
+            <!-- Video Siyahısı (21 Dərs) -->
+            <div class="video-list">
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Dərs 1. Tanışlıq, Kompüterin növləri</span>
+                    </div>
+                    <a href="https://youtu.be/sBwt2dKCDlQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Dərs 2. Kompüterin hissələri ( CPU, GPU, RAM )</span>
+                    </div>
+                    <a href="https://youtu.be/6cVqVD9MkIQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Dərs 3. Kompüterin hissələri</span>
+                    </div>
+                    <a href="https://youtu.be/u9QGQ6UePhg" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Dərs 4. Ana plata, giriş çıxış qurğuları</span>
+                    </div>
+                    <a href="https://youtu.be/0DwuUh662jQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Dərs 5. Əməliyyat Hissələri. Giriş</span>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=4y2etT_-VUQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Dərs 6. Əməliyyat sistemlərinin nüvələri və driver-lər</span>
+                    </div>
+                    <a href="https://youtu.be/cJMUYfsxrI8" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Dərs 7. Windows 11-in Virtualbox-a yazılması</span>
+                    </div>
+                    <a href="https://youtu.be/Op2f-IHL87o" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Dərs 8. Linux-un yazılması</span>
+                    </div>
+                    <a href="https://youtu.be/cwzMwkxPTz8" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Alqoritm. Dərs 1</span>
+                    </div>
+                    <a href="https://youtu.be/T7SqDeebxY0" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Ce 58 Alqoritm</span>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=jNj80mOgR6k" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Alqoritmlər. Flowchart. Dəyişənlər</span>
+                    </div>
+                    <a href="https://youtu.be/cgtLTzadeCM" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Məntiqi və Riyazi operatorlar, Tək və cüt ədədlərin tapılması</span>
+                    </div>
+                    <a href="https://youtu.be/1YJ2vMjZRDs" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Online dərs, and və or izahı</span>
+                    </div>
+                    <a href="https://youtu.be/j_jBJERw6ug" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Dövrü Alqoritm</span>
+                    </div>
+                    <a href="https://youtu.be/0dF0YmwLN98" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>AI, LLM, ML, DL</span>
+                    </div>
+                    <a href="https://youtu.be/jk6F5_AJg5g" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Ip, Router, Modem, WiFi</span>
+                    </div>
+                    <a href="https://youtu.be/hD9aKychRc4" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Jan AI</span>
+                    </div>
+                    <a href="https://youtu.be/9hYrOXgJ4lI" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Openclaw</span>
+                    </div>
+                    <a href="https://youtu.be/Z_ePpxBP0ag" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Vakansiya avtomatlaşdırılması. Openclaw</span>
+                    </div>
+                    <a href="https://youtu.be/K8_hhkKDrAI" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Openclaw yazılması</span>
+                    </div>
+                    <a href="https://youtu.be/UBj0asPcpXw" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Hermes</span>
+                    </div>
+                    <a href="https://youtu.be/rFzZ1YUTX1M" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Modal Aşağı Hissəsi: Müəllim -->
+            <div class="modal-footer">
+                <p>Müəllim: <span>Rasim İsmayılaov</span></p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Zəmanətli Modal Skripti -->
+    <script>
+        const openBtn = document.getElementById('openBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const modal = document.getElementById('videoModal');
+
+        openBtn.addEventListener('click', function() {
+            modal.style.display = 'flex';
+        });
+
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background: #0f172a;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 20px;
+}
+
+/* Hero Container */
+.hero-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+
+/* Böyüdülmüş Şəffaf Loqo Stili */
+.hero-logo-img {
+    height: 155px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 6px 15px rgba(0, 0, 0, 0.4));
+}
+
+/* Loqonun Altındakı Çərçivəsiz Ağ CE 58 Yazısı */
+.hero-course-text {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+}
+
+.main-title {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.sub-title {
+    color: #94a3b8;
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+/* Əsas Videolar Düyməsi */
+.main-video-btn {
+    background: linear-gradient(135deg, maroon, #880e4f);
+    color: white;
+    border: none;
+    padding: 18px 50px;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(128, 0, 0, 0.5);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.main-video-btn:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(255, 144, 150, 0.4);
+    background: linear-gradient(135deg, #a71d2a, maroon);
+}
+
+/* Səhifənin Ən Altındakı Müəllim İmza (Footer) */
+.page-footer {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 15px;
+    padding-bottom: 5px;
+}
+
+.page-footer span {
+    color: rgb(255, 226, 173);
+    font-weight: 600;
+}
+
+/* Modal Pəncərə */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-box {
+    background: #1e293b;
+    width: 90%;
+    max-width: 680px;
+    max-height: 85vh;
+    overflow-y: auto;
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid #334155;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #334155;
+    position: sticky;
+    top: 0;
+    background: #1e293b;
+    z-index: 10;
+}
+
+.header-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.badge-tag {
+    display: inline-block;
+    background: maroon;
+    color: rgb(255, 226, 173);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    width: fit-content;
+}
+
+.modal-main-title {
+    font-size: 26px;
+    color: #f8fafc;
+    font-weight: 700;
+}
+
+.modal-sub-title {
+    font-size: 16px;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.close-icon {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 30px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-icon:hover {
+    color: #ff4d4d;
+}
+
+/* Video Siyahısı */
+.video-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.video-item {
+    background: #0f172a;
+    padding: 14px 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #1e293b;
+    transition: all 0.2s ease;
+}
+
+.video-item:hover {
+    border-color: maroon;
+    transform: translateX(4px);
+}
+
+.video-item .info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #e2e8f0;
+}
+
+.video-item .info i {
+    color: maroon;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.link-btn {
+    background: maroon;
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.link-btn:hover {
+    background: rgb(255, 144, 150);
+    color: maroon;
+}
+
+/* Modal Footer */
+.modal-footer {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #334155;
+    text-align: center;
+    font-size: 15px;
+    color: #94a3b8;
+}
+
+.modal-footer span {
+    color: rgb(255, 226, 173);
+    font-weight: 600;
+}
+
+/* Scrollbar */
+.modal-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-box::-webkit-scrollbar-track {
+    background: #0f172a;
+    border-radius: 10px;
+}
+
+.modal-box::-webkit-scrollbar-thumb {
+    background: maroon;
+    border-radius: 10px;
+}
+
+.modal-box::-webkit-scrollbar-thumb:hover {
+    background: #a71d2a;
+}
