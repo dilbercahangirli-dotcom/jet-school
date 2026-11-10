@@ -9,11 +9,15 @@
     
     <!-- Socket.io Canlı Əlaqə Skripti -->
     <script src="/socket.io/socket.io.js"></script>
+    <style>
+        /* Giriş modalının başlanğıcda stabil görünməsi üçün */
+        #authModal.hidden { display: none !important; }
+    </style>
 </head>
 <body>
 
     <!-- GİRİŞ PAROL MODALI (Parol: CE-58) -->
-    <div id="authModal" class="modal-overlay force-show">
+    <div id="authModal" class="modal-overlay" style="display: flex;">
         <div class="modal-box auth-box">
             <div class="auth-header">
                 <img src="Jet School Loqo.png" alt="Jet School Logo" class="auth-logo">
@@ -24,7 +28,7 @@
                 <div class="form-group">
                     <input type="password" id="passInput" placeholder="Parolu daxil edin..." required>
                 </div>
-                <p id="errorMsg" class="error-msg"></p>
+                <p id="errorMsg" class="error-msg" style="color: red; margin-bottom: 10px;"></p>
                 <button type="button" id="loginBtn" class="save-btn"><i class="fas fa-key"></i> Daxil Ol</button>
             </div>
         </div>
@@ -57,7 +61,7 @@
         </div>
     </header>
 
-    <!-- MƏRKƏZİ GİRİŞ EKRANI (İstədiyin yazı buradadır) -->
+    <!-- MƏRKƏZİ GİRİŞ EKRANI -->
     <div class="hero-container">
         <img src="Jet School Loqo.png" alt="Jet School Logo" class="hero-logo-img">
         <div class="hero-course-text">CE 58</div>
@@ -128,14 +132,6 @@
                     <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 2. Kompüterin hissələri ( CPU, GPU, RAM )</span></div>
                     <a href="https://youtu.be/6cVqVD9MkIQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="video-item">
-                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 3. Kompüterin hissələri</span></div>
-                    <a href="https://youtu.be/u9QGQ6UePhg" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="video-item">
-                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 4. Ana plata, giriş çıxış qurğuları</span></div>
-                    <a href="https://youtu.be/0DwuUh662jQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-                </div>
             </div>
 
             <div class="modal-footer">
@@ -144,7 +140,7 @@
         </div>
     </div>
 
-    <!-- ÇAT MODALI (Çat pəncərəsinin üzərindəki başqa yazı) -->
+    <!-- ÇAT MODALI -->
     <div id="chatModal" class="modal-overlay">
         <div class="modal-box chat-modal-box large-chat-box">
             <div class="modal-header">
@@ -195,7 +191,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC (SOCKET.IO) -->
+    <!-- JAVASCRIPT MƏNTİQİ -->
     <script>
         const socket = io();
 
@@ -203,19 +199,20 @@
         const loginBtn = document.getElementById('loginBtn');
         const passInput = document.getElementById('passInput');
         const errorMsg = document.getElementById('errorMsg');
-        const notificationToast = document.getElementById('notificationToast');
 
+        // Giriş yoxlaması
         if (sessionStorage.getItem('authenticated') === 'true') {
-            authModal.classList.add('hidden');
+            authModal.style.display = 'none';
         }
 
         function checkLogin() {
-            if (passInput.value.trim() === 'CE-58') {
+            const val = passInput.value.trim();
+            if (val === 'CE-58') {
                 sessionStorage.setItem('authenticated', 'true');
-                authModal.classList.add('hidden');
+                authModal.style.display = 'none';
                 errorMsg.textContent = '';
             } else {
-                errorMsg.textContent = 'Parol yanlışdır!';
+                errorMsg.textContent = 'Parol yanlışdır! (CE-58 yazın)';
             }
         }
 
