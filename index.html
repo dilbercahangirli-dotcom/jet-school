@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <!-- GİRİŞ PAROL MODALI (Parol: ce58) -->
+    <!-- GİRİŞ PAROL MODALI (Parol: CE-58) -->
     <div id="authModal" class="modal-overlay force-show">
         <div class="modal-box auth-box">
             <div class="auth-header">
@@ -19,7 +19,8 @@
             </div>
             <div class="auth-form">
                 <div class="form-group">
-                    <input type="password" id="passInput" placeholder="Parolu daxil edin (ce58)..." required>
+                    <!-- Şifrə ipucu yoxdur! -->
+                    <input type="password" id="passInput" placeholder="Parolu daxil edin..." required>
                 </div>
                 <p id="errorMsg" class="error-msg"></p>
                 <button type="button" id="loginBtn" class="save-btn"><i class="fas fa-key"></i> Daxil Ol</button>
@@ -213,193 +214,4 @@
             </div>
 
             <div class="modal-footer">
-                <p>Müəllim: <span>Rasim İsmayılaov</span></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ÇAT MODALI -->
-    <div id="chatModal" class="modal-overlay">
-        <div class="modal-box chat-modal-box">
-            <div class="modal-header">
-                <div class="header-titles">
-                    <span class="badge-tag">Müzakirə</span>
-                    <h2 class="modal-main-title"><i class="fas fa-comments"></i> Qrup Çatı (CE 58)</h2>
-                </div>
-                <button id="closeChatBtn" class="close-icon">&times;</button>
-            </div>
-            
-            <div id="chatMessages" class="chat-messages">
-                <div class="chat-msg system-msg">
-                    <span>Çata xoş gəlmisiniz! Profili görmək üçün mesaj yazan şəxsin adına klikləyin.</span>
-                </div>
-            </div>
-
-            <div class="chat-input-box">
-                <input type="text" id="chatInput" placeholder="Mesajınızı yazın..." maxlength="250">
-                <button type="button" id="sendBtn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
-            </div>
-
-            <div class="modal-footer">
-                <p>Müəllim: <span>Rasim İsmayılaov</span></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCRIPT LOGIC -->
-    <script>
-        // PAROL YOXLANILMASI (ce58)
-        const authModal = document.getElementById('authModal');
-        const loginBtn = document.getElementById('loginBtn');
-        const passInput = document.getElementById('passInput');
-        const errorMsg = document.getElementById('errorMsg');
-
-        if (sessionStorage.getItem('authenticated') === 'true') {
-            authModal.classList.remove('force-show');
-        }
-
-        function checkLogin() {
-            if (passInput.value.trim() === 'ce58') {
-                sessionStorage.setItem('authenticated', 'true');
-                authModal.classList.remove('force-show');
-                errorMsg.textContent = '';
-            } else {
-                errorMsg.textContent = 'Parol yanlışdır! ("ce58" yazın)';
-            }
-        }
-
-        loginBtn.addEventListener('click', checkLogin);
-        passInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') checkLogin();
-        });
-
-        // PROFİL SİSTEMİ
-        let myProfile = JSON.parse(localStorage.getItem('myJetProfile')) || {
-            firstName: 'Dilbər',
-            lastName: 'Cahangirli',
-            about: 'Class 6A | Programmer'
-        };
-
-        const userNameText = document.getElementById('userNameText');
-        const userRoleText = document.getElementById('userRoleText');
-        const profileTrigger = document.getElementById('profileTrigger');
-        const profileModal = document.getElementById('profileModal');
-        const closeProfileBtn = document.getElementById('closeProfileBtn');
-        const saveProfileBtn = document.getElementById('saveProfileBtn');
-
-        const firstNameInput = document.getElementById('firstNameInput');
-        const lastNameInput = document.getElementById('lastNameInput');
-        const aboutInput = document.getElementById('aboutInput');
-
-        function updateMyProfileUI() {
-            userNameText.textContent = `${myProfile.firstName} ${myProfile.lastName}`.trim();
-            userRoleText.textContent = myProfile.about || 'Şagird';
-            firstNameInput.value = myProfile.firstName;
-            lastNameInput.value = myProfile.lastName;
-            aboutInput.value = myProfile.about;
-        }
-        updateMyProfileUI();
-
-        profileTrigger.addEventListener('click', () => {
-            profileModal.style.display = 'flex';
-        });
-        closeProfileBtn.addEventListener('click', () => {
-            profileModal.style.display = 'none';
-        });
-
-        saveProfileBtn.addEventListener('click', () => {
-            myProfile.firstName = firstNameInput.value.trim() || 'İstifadəçi';
-            myProfile.lastName = lastNameInput.value.trim();
-            myProfile.about = aboutInput.value.trim();
-
-            localStorage.setItem('myJetProfile', JSON.stringify(myProfile));
-            updateMyProfileUI();
-            profileModal.style.display = 'none';
-        });
-
-        // DÜYMƏLƏR VƏ MODALLAR
-        const openVideosBtn = document.getElementById('openVideosBtn');
-        const openChatBtn = document.getElementById('openChatBtn');
-        const videoModal = document.getElementById('videoModal');
-        const chatModal = document.getElementById('chatModal');
-        const closeVideoBtn = document.getElementById('closeVideoBtn');
-        const closeChatBtn = document.getElementById('closeChatBtn');
-
-        openVideosBtn.addEventListener('click', () => {
-            videoModal.style.display = 'flex';
-        });
-        openChatBtn.addEventListener('click', () => {
-            chatModal.style.display = 'flex';
-        });
-
-        closeVideoBtn.addEventListener('click', () => {
-            videoModal.style.display = 'none';
-        });
-        closeChatBtn.addEventListener('click', () => {
-            chatModal.style.display = 'none';
-        });
-
-        // BAŞQASININ PROFİLİNƏ BAXMA
-        const viewProfileModal = document.getElementById('viewProfileModal');
-        const closeViewProfileBtn = document.getElementById('closeViewProfileBtn');
-        const viewFullName = document.getElementById('viewFullName');
-        const viewAboutText = document.getElementById('viewAboutText');
-
-        closeViewProfileBtn.addEventListener('click', () => {
-            viewProfileModal.style.display = 'none';
-        });
-
-        function openUserCard(name, about) {
-            viewFullName.textContent = name;
-            viewAboutText.textContent = about || 'Haqqında məlumat qeyd olunmayıb.';
-            viewProfileModal.style.display = 'flex';
-        }
-
-        // ÇAT
-        const chatInput = document.getElementById('chatInput');
-        const sendBtn = document.getElementById('sendBtn');
-        const chatMessages = document.getElementById('chatMessages');
-
-        function sendMessage() {
-            const text = chatInput.value.trim();
-            if (!text) return;
-
-            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            const fullName = `${myProfile.firstName} ${myProfile.lastName}`.trim();
-            const aboutData = myProfile.about;
-
-            const msgDiv = document.createElement('div');
-            msgDiv.className = 'chat-msg';
-            
-            msgDiv.innerHTML = `
-                <div class="msg-header">
-                    <span class="msg-author-btn"><i class="fas fa-user"></i> ${fullName}</span>
-                    <span class="msg-time">${timeStr}</span>
-                </div>
-                <div class="msg-body">${text}</div>
-            `;
-
-            msgDiv.querySelector('.msg-author-btn').addEventListener('click', () => {
-                openUserCard(fullName, aboutData);
-            });
-
-            chatMessages.appendChild(msgDiv);
-            chatInput.value = '';
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        sendBtn.addEventListener('click', sendMessage);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
-
-        // Pəncərədən çölə kliklədikdə bağlanma
-        window.addEventListener('click', (event) => {
-            if (event.target === videoModal) videoModal.style.display = 'none';
-            if (event.target === chatModal) chatModal.style.display = 'none';
-            if (event.target === profileModal) profileModal.style.display = 'none';
-            if (event.target === viewProfileModal) viewProfileModal.style.display = 'none';
-        });
-    </script>
-</body>
-</html>
+                <p
