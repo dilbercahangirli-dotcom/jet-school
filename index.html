@@ -270,15 +270,23 @@
     </div>
 
     <!-- JAVASCRIPT MƏNTİQİ -->
-    <script>
-       const socket = io("https://hay-theme-designing-tutorial.trycloudflare.com", {
-    transports: ["websocket", "polling"]
-});
+<script>
+    const socket = io("https://hay-theme-designing-tutorial.trycloudflare.com", {
+        transports: ["websocket", "polling"]
+    });
 
-        const authModal = document.getElementById('authModal');
-        const loginBtn = document.getElementById('loginBtn');
-        const passInput = document.getElementById('passInput');
-        const errorMsg = document.getElementById('errorMsg');
+    socket.on('connect', () => {
+        console.log('CHAT CONNECTED:', socket.id);
+    });
+
+    socket.on('connect_error', (err) => {
+        console.error('CHAT ERROR:', err.message);
+    });
+
+    const authModal = document.getElementById('authModal');
+    const loginBtn = document.getElementById('loginBtn');
+    const passInput = document.getElementById('passInput');
+    const errorMsg = document.getElementById('errorMsg');
 
         // Giriş yoxlaması
         if (sessionStorage.getItem('authenticated') === 'true') {
