@@ -444,6 +444,7 @@
             };
 
             socket.emit('send_message', messageObj);
+            console.log('MESAJ GÖNDƏRİLDİ:', messageObj);
 
             chatInput.value = '';
             removeFileBtn.click();
