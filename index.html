@@ -6,17 +6,15 @@
     <title>Video Portal - Jet School</title>
     <link rel="stylesheet" href="veb.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- Socket.io Canlı Əlaqə Skripti -->
-    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
     <style>
-        /* Giriş modalının başlanğıcda stabil görünməsi üçün */
-        #authModal.hidden { display: none !important; }
+        #authModal.hidden {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
 
-    <!-- GİRİŞ PAROL MODALI (Parol: CE-58) -->
+    <!-- GİRİŞ PAROL MODALI -->
     <div id="authModal" class="modal-overlay" style="display: flex;">
         <div class="modal-box auth-box">
             <div class="auth-header">
@@ -29,17 +27,10 @@
                     <input type="password" id="passInput" placeholder="Parolu daxil edin..." required>
                 </div>
                 <p id="errorMsg" class="error-msg" style="color: red; margin-bottom: 10px;"></p>
-                <button type="button" id="loginBtn" class="save-btn"><i class="fas fa-key"></i> Daxil Ol</button>
+                <button type="button" id="loginBtn" class="save-btn">
+                    <i class="fas fa-key"></i> Daxil Ol
+                </button>
             </div>
-        </div>
-    </div>
-
-    <!-- BİLDİRİŞ QUTUSU -->
-    <div id="notificationToast" class="notification-toast">
-        <i class="fas fa-bell"></i>
-        <div>
-            <h4 id="notifTitle">Yeni Mesaj</h4>
-            <p id="notifText">Kimsə mesaj yazdı...</p>
         </div>
     </div>
 
@@ -67,13 +58,10 @@
         <div class="hero-course-text">CE 58</div>
         <h1 class="main-title">Video Kolleksiyası</h1>
         <p class="sub-title">Bütün dərslərə və faydalı keçidlərə bir kliklə baxın</p>
-        
+
         <div class="main-buttons-group">
             <button type="button" id="openVideosBtn" class="cool-main-btn">
                 <i class="fab fa-youtube"></i> Videolar
-            </button>
-            <button type="button" id="openChatBtn" class="cool-main-btn">
-                <i class="fas fa-comments"></i> Çat
             </button>
         </div>
     </div>
@@ -86,27 +74,36 @@
     <div id="profileModal" class="modal-overlay">
         <div class="modal-box small-modal">
             <div class="modal-header">
-                <h2 class="modal-main-title"><i class="fas fa-user-cog"></i> Profil Tənzimləmələri</h2>
+                <h2 class="modal-main-title">
+                    <i class="fas fa-user-cog"></i> Profil Tənzimləmələri
+                </h2>
                 <button type="button" id="closeProfileBtn" class="close-icon">&times;</button>
             </div>
+
             <div class="profile-form">
                 <div class="form-group avatar-upload-group">
                     <label>Profil Şəkli Seç:</label>
                     <input type="file" id="avatarFileInput" accept="image/*">
                 </div>
+
                 <div class="form-group">
                     <label for="firstNameInput">Name (Ad):</label>
                     <input type="text" id="firstNameInput" placeholder="Məsələn: Əli" required>
                 </div>
+
                 <div class="form-group">
                     <label for="lastNameInput">Last Name (Soyad):</label>
                     <input type="text" id="lastNameInput" placeholder="Məsələn: Məmmədov">
                 </div>
+
                 <div class="form-group">
                     <label for="aboutInput">About (Haqqında):</label>
                     <textarea id="aboutInput" rows="3" placeholder="Özünüz haqqında qısa məlumat yaza bilərsiniz..."></textarea>
                 </div>
-                <button type="button" id="saveProfileBtn" class="save-btn"><i class="fas fa-save"></i> Yadda Saxla</button>
+
+                <button type="button" id="saveProfileBtn" class="save-btn">
+                    <i class="fas fa-save"></i> Yadda Saxla
+                </button>
             </div>
         </div>
     </div>
@@ -122,145 +119,119 @@
                 </div>
                 <button type="button" id="closeVideoBtn" class="close-icon">&times;</button>
             </div>
-            
-            
-<div class="video-list">
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 1. Tanışlıq, Kompüterin növləri</span></div>
-    <a href="https://youtu.be/sBwt2dKCDlQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 2. Kompüterin hissələri (CPU, GPU, RAM)</span></div>
-    <a href="https://youtu.be/6cVqVD9MkIQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 3. Kompüterin hissələri</span></div>
-    <a href="https://youtu.be/u9QGQ6UePhg" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 4. Ana plata, giriş çıxış qurğuları</span></div>
-    <a href="https://youtu.be/0DwuUh662jQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 5. Əməliyyat Hissələri. Giriş</span></div>
-    <a href="https://www.youtube.com/watch?v=4y2etT_-VUQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 6. Əməliyyat sistemlərinin nüvələri və driver-lər</span></div>
-    <a href="https://youtu.be/cJMUYfsxrI8" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 7. Windows 11-in Virtualbox-a yazılması</span></div>
-    <a href="https://youtu.be/Op2f-IHL87o" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 8. Linux-un yazılması</span></div>
-    <a href="https://youtu.be/cwzMwkxPTz8" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Alqoritm. Dərs 1</span></div>
-    <a href="https://youtu.be/T7SqDeebxY0" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Ce 58 Alqoritm</span></div>
-    <a href="https://www.youtube.com/watch?v=jNj80mOgR6k" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Alqoritmlər. Flowchart. Dəyişənlər</span></div>
-    <a href="https://youtu.be/cgtLTzadeCM" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Məntiqi və Riyazi operatorlar, Tək və cüt ədədlərin tapılması</span></div>
-    <a href="https://youtu.be/1YJ2vMjZRDs" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Online dərs, and və or izahı</span></div>
-    <a href="https://youtu.be/j_jBJERw6ug" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Dövrü Alqoritm</span></div>
-    <a href="https://youtu.be/0dF0YmwLN98" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>AI, LLM, ML, DL</span></div>
-    <a href="https://youtu.be/jk6F5_AJg5g" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>IP, Router, Modem, WiFi</span></div>
-    <a href="https://youtu.be/hD9aKychRc4" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Jan AI</span></div>
-    <a href="https://youtu.be/9hYrOXgJ4lI" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Openclaw</span></div>
-    <a href="https://youtu.be/Z_ePpxBP0ag" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Vakansiya avtomatlaşdırılması. Openclaw</span></div>
-    <a href="https://youtu.be/K8_hhkKDrAI" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Openclaw yazılması</span></div>
-    <a href="https://youtu.be/UBj0asPcpXw" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-  <div class="video-item">
-    <div class="info"><i class="fas fa-play-circle"></i> <span>Hermes</span></div>
-    <a href="https://youtu.be/rFzZ1YUTX1M" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
-  </div>
-</div>
 
-<div class="modal-footer">
-    <p>Müəllim: <span>Rasim İsmayılov</span></p>
-</div>
+            <div class="video-list">
 
-        </div>
-    </div>
-
-<!-- ÇAT MODALI -->
-    <div id="chatModal" class="modal-overlay">
-        <div class="modal-box chat-modal-box large-chat-box">
-            <div class="modal-header">
-                <div class="header-titles">
-                    <span class="badge-tag" id="chatHeaderBadge">CE 58 Qrupu</span>
-                    <h2 class="modal-main-title" id="chatHeaderTitle"><i class="fas fa-comments"></i> Sinif İçi Canlı Müzakirə</h2>
-                    <h3 class="modal-sub-title" id="chatHeaderSub">Fikirlərinizi bölüşün, şəkil və fayl göndərin</h3>
-                </div>
-                <button type="button" id="closeChatBtn" class="close-icon">&times;</button>
-            </div>
-            
-            <div class="chat-layout-container">
-                <div class="contacts-sidebar">
-                    <h3><i class="fas fa-address-book"></i> Kontaktlar</h3>
-                    <div class="contact-item active-contact" id="globalChatTab">
-                        <i class="fas fa-users"></i> Ümumi Çat
-                    </div>
-                    <div id="contactsList" class="contacts-list"></div>
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 1. Tanışlıq, Kompüterin növləri</span></div>
+                    <a href="https://youtu.be/sBwt2dKCDlQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <div class="chat-main-area">
-                    <div id="chatMessages" class="chat-messages">
-                        <div class="chat-msg system-msg">
-                            <span>Çata xoş gəlmisiniz! Şəkil, video və ya fayl göndərə bilərsiniz.</span>
-                        </div>
-                    </div>
-
-                    <div id="filePreviewContainer" class="file-preview-container" style="display: none;">
-                        <span id="fileNamePreview">Fayl seçildi</span>
-                        <button type="button" id="removeFileBtn">&times;</button>
-                    </div>
-
-                    <div class="chat-input-box">
-                        <label for="chatFileInput" class="file-attach-btn" title="Şəkil, Video və ya Fayl yüklə">
-                            <i class="fas fa-paperclip"></i>
-                        </label>
-                        <input type="file" id="chatFileInput" accept="image/*,video/*,.pdf,.doc,.docx,.txt" style="display: none;">
-
-                        <input type="text" id="chatInput" placeholder="Mesajınızı yazın..." maxlength="250">
-                        <button type="button" id="sendBtn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
-                    </div>
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 2. Kompüterin hissələri (CPU, GPU, RAM)</span></div>
+                    <a href="https://youtu.be/6cVqVD9MkIQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
                 </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 3. Kompüterin hissələri</span></div>
+                    <a href="https://youtu.be/u9QGQ6UePhg" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 4. Ana plata, giriş çıxış qurğuları</span></div>
+                    <a href="https://youtu.be/0DwuUh662jQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 5. Əməliyyat Hissələri. Giriş</span></div>
+                    <a href="https://www.youtube.com/watch?v=4y2etT_-VUQ" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 6. Əməliyyat sistemlərinin nüvələri və driver-lər</span></div>
+                    <a href="https://youtu.be/cJMUYfsxrI8" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 7. Windows 11-in Virtualbox-a yazılması</span></div>
+                    <a href="https://youtu.be/Op2f-IHL87o" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dərs 8. Linux-un yazılması</span></div>
+                    <a href="https://youtu.be/cwzMwkxPTz8" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Alqoritm. Dərs 1</span></div>
+                    <a href="https://youtu.be/T7SqDeebxY0" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Ce 58 Alqoritm</span></div>
+                    <a href="https://www.youtube.com/watch?v=jNj80mOgR6k" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Alqoritmlər. Flowchart. Dəyişənlər</span></div>
+                    <a href="https://youtu.be/cgtLTzadeCM" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Məntiqi və Riyazi operatorlar, Tək və cüt ədədlərin tapılması</span></div>
+                    <a href="https://youtu.be/1YJ2vMjZRDs" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Online dərs, and və or izahı</span></div>
+                    <a href="https://youtu.be/j_jBJERw6ug" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Dövrü Alqoritm</span></div>
+                    <a href="https://youtu.be/0dF0YmwLN98" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>AI, LLM, ML, DL</span></div>
+                    <a href="https://youtu.be/jk6F5_AJg5g" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>IP, Router, Modem, WiFi</span></div>
+                    <a href="https://youtu.be/hD9aKychRc4" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Jan AI</span></div>
+                    <a href="https://youtu.be/9hYrOXgJ4lI" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Openclaw</span></div>
+                    <a href="https://youtu.be/Z_ePpxBP0ag" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Vakansiya avtomatlaşdırılması. Openclaw</span></div>
+                    <a href="https://youtu.be/K8_hhkKDrAI" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Openclaw yazılması</span></div>
+                    <a href="https://youtu.be/UBj0asPcpXw" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Hermes</span></div>
+                    <a href="https://youtu.be/rFzZ1YUTX1M" target="_blank" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="video-item">
+                    <div class="info"><i class="fas fa-play-circle"></i> <span>Hermesin yazılması</span></div>
+                    <a href="https://www.youtube.com/watch?v=a_0pcFn8xWU" target="_blank" rel="noopener noreferrer" class="link-btn">Keçid Et <i class="fas fa-arrow-right"></i></a>
+                </div>
+
             </div>
 
             <div class="modal-footer">
@@ -270,31 +241,19 @@
     </div>
 
     <!-- JAVASCRIPT MƏNTİQİ -->
-<script>
-    const socket = io("https://climate-person-observations-graphical.trycloudflare.com", {
-    transports: ["websocket", "polling"]
-});
+    <script>
+        const authModal = document.getElementById('authModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const passInput = document.getElementById('passInput');
+        const errorMsg = document.getElementById('errorMsg');
 
-    socket.on('connect', () => {
-        console.log('CHAT CONNECTED:', socket.id);
-    });
-
-    socket.on('connect_error', (err) => {
-        console.error('CHAT ERROR:', err.message);
-    });
-
-    const authModal = document.getElementById('authModal');
-    const loginBtn = document.getElementById('loginBtn');
-    const passInput = document.getElementById('passInput');
-    const errorMsg = document.getElementById('errorMsg');
-
-        // Giriş yoxlaması
         if (sessionStorage.getItem('authenticated') === 'true') {
             authModal.style.display = 'none';
         }
 
         function checkLogin() {
             const val = passInput.value.trim();
+
             if (val === 'CE-58') {
                 sessionStorage.setItem('authenticated', 'true');
                 authModal.style.display = 'none';
@@ -305,7 +264,9 @@
         }
 
         loginBtn.onclick = checkLogin;
-        passInput.onkeypress = (e) => { if (e.key === 'Enter') checkLogin(); };
+        passInput.onkeypress = (e) => {
+            if (e.key === 'Enter') checkLogin();
+        };
 
         let myProfile = JSON.parse(localStorage.getItem('myJetProfile')) || {
             firstName: '',
@@ -331,9 +292,10 @@
 
         function updateMyProfileUI() {
             const fullName = `${myProfile.firstName} ${myProfile.lastName}`.trim();
+
             userNameText.textContent = fullName || 'Şagird';
             userRoleText.textContent = myProfile.about || 'Class 6A | CE 58';
-            
+
             firstNameInput.value = myProfile.firstName;
             lastNameInput.value = myProfile.lastName;
             aboutInput.value = myProfile.about;
@@ -347,19 +309,28 @@
                 headerAvatarIcon.style.display = 'block';
             }
         }
+
         updateMyProfileUI();
 
-        profileTrigger.onclick = () => { profileModal.style.display = 'flex'; };
-        closeProfileBtn.onclick = () => { profileModal.style.display = 'none'; };
+        profileTrigger.onclick = () => {
+            profileModal.style.display = 'flex';
+        };
+
+        closeProfileBtn.onclick = () => {
+            profileModal.style.display = 'none';
+        };
 
         saveProfileBtn.onclick = () => {
             const file = avatarFileInput.files[0];
+
             if (file) {
                 const reader = new FileReader();
+
                 reader.onload = function(e) {
                     myProfile.avatar = e.target.result;
                     saveProfileData();
                 };
+
                 reader.readAsDataURL(file);
             } else {
                 saveProfileData();
@@ -372,122 +343,25 @@
             myProfile.about = aboutInput.value.trim();
 
             localStorage.setItem('myJetProfile', JSON.stringify(myProfile));
+
             updateMyProfileUI();
             profileModal.style.display = 'none';
         }
 
         const openVideosBtn = document.getElementById('openVideosBtn');
-        const openChatBtn = document.getElementById('openChatBtn');
         const videoModal = document.getElementById('videoModal');
-        const chatModal = document.getElementById('chatModal');
         const closeVideoBtn = document.getElementById('closeVideoBtn');
-        const closeChatBtn = document.getElementById('closeChatBtn');
 
-        openVideosBtn.onclick = () => { videoModal.style.display = 'flex'; };
-        openChatBtn.onclick = () => { chatModal.style.display = 'flex'; };
-
-        closeVideoBtn.onclick = () => { videoModal.style.display = 'none'; };
-        closeChatBtn.onclick = () => { chatModal.style.display = 'none'; };
-
-        // ÇAT VƏ MESAJLAŞMA LOGİKASI
-        const chatInput = document.getElementById('chatInput');
-        const sendBtn = document.getElementById('sendBtn');
-        const chatMessages = document.getElementById('chatMessages');
-        const chatFileInput = document.getElementById('chatFileInput');
-        const filePreviewContainer = document.getElementById('filePreviewContainer');
-        const fileNamePreview = document.getElementById('fileNamePreview');
-        const removeFileBtn = document.getElementById('removeFileBtn');
-
-        let selectedFileBase64 = null;
-        let selectedFileType = null;
-        let selectedFileName = null;
-
-        chatFileInput.onchange = (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                selectedFileName = file.name;
-                selectedFileType = file.type;
-                const reader = new FileReader();
-                reader.onload = function(uploadEvent) {
-                    selectedFileBase64 = uploadEvent.target.result;
-                    fileNamePreview.textContent = `Seçildi: ${selectedFileName}`;
-                    filePreviewContainer.style.display = 'flex';
-                };
-                reader.readAsDataURL(file);
-            }
+        openVideosBtn.onclick = () => {
+            videoModal.style.display = 'flex';
         };
 
-        removeFileBtn.onclick = () => {
-            selectedFileBase64 = null;
-            selectedFileType = null;
-            selectedFileName = null;
-            chatFileInput.value = '';
-            filePreviewContainer.style.display = 'none';
+        closeVideoBtn.onclick = () => {
+            videoModal.style.display = 'none';
         };
-
-        function sendMessage() {
-            const text = chatInput.value.trim();
-            if (!text && !selectedFileBase64) return;
-
-            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            const fullName = `${myProfile.firstName} ${myProfile.lastName}`.trim() || 'İstifadəçi';
-
-            const messageObj = { 
-                name: fullName, 
-                about: myProfile.about, 
-                avatar: '', 
-                text: text, 
-                time: timeStr,
-                fileData: selectedFileBase64,
-                fileType: selectedFileType,
-                fileName: selectedFileName
-            };
-
-            socket.emit('send_message', messageObj);
-            console.log('MESAJ GÖNDƏRİLDİ:', messageObj);
-
-            chatInput.value = '';
-            removeFileBtn.click();
-        }
-
-        sendBtn.onclick = sendMessage;
-        chatInput.onkeypress = (e) => { if (e.key === 'Enter') sendMessage(); };
-
-        socket.on('receive_message', (msg) => {
-            appendMessageToDOM(msg.name, msg.about, msg.avatar, msg.text, msg.time, msg.fileData, msg.fileType, msg.fileName);
-        });
-
-        function appendMessageToDOM(name, about, avatar, text, timeStr, fileData, fileType, fileName) {
-            const msgDiv = document.createElement('div');
-            msgDiv.className = 'chat-msg';
-            
-            const avatarHtml = avatar 
-                ? `<img src="${avatar}" class="msg-avatar-img" alt="avatar">` 
-                : `<i class="fas fa-user-circle msg-avatar-icon"></i>`;
-
-            let mediaHtml = '';
-            if (fileData) {
-                if (fileType && fileType.startsWith('image/')) {
-                    mediaHtml = `<div class="msg-media"><img src="${fileData}" alt="şəkil"></div>`;
-                } else if (fileType && fileType.startsWith('video/')) {
-                    mediaHtml = `<div class="msg-media"><video controls src="${fileData}"></video></div>`;
-                } else {
-                    mediaHtml = `<div class="msg-file-link"><a href="${fileData}" download="${fileName}"><i class="fas fa-file-download"></i> ${fileName || 'Faylı yüklə'}</a></div>`;
-                }
-            }
-
-            msgDiv.innerHTML = `
-                <div class="msg-header">
-                    <span class="msg-author-btn">${avatarHtml} <b>${name}</b></span>
-                    <span class="msg-time">${timeStr}</span>
-                </div>
-                <div class="msg-body">${text}</div>
-                ${mediaHtml}
-            `;
-
-            chatMessages.appendChild(msgDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
