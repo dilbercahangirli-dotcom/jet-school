@@ -682,4 +682,54 @@ body::after {
         animation: none;
     }
 }
+/* JET SCHOOL - LOTTIE YAN ANİMASİYALARI */
 
+.side-animation {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 260px;
+    height: 260px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.side-animation dotlottie-wc {
+    width: 100%;
+    height: 100%;
+}
+
+.left-animation {
+    left: 2%;
+}
+
+.right-animation {
+    right: 2%;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 900px) {
+    .side-animation {
+        width: 150px;
+        height: 150px;
+        opacity: 0.65;
+    }
+}
+
+@media (max-width: 600px) {
+    .side-animation {
+        width: 85px;
+        height: 85px;
+        opacity: 0.45;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .side-animation {
+        display: none;
+    }
+}
